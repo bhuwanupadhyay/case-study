@@ -1,45 +1,48 @@
 package io.github.bhuwanupadhyay.casestudy.sales.interfaces;
 
+import io.github.bhuwanupadhyay.casestudy.sales.application.queryservices.OrdersQueryService;
+import io.github.bhuwanupadhyay.casestudy.sales.domain.services.CancelOrderCommandService;
+import io.github.bhuwanupadhyay.casestudy.sales.domain.services.ModifyOrderCommandService;
+import io.github.bhuwanupadhyay.casestudy.sales.domain.services.PlaceOrderCommandService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-public interface SalesHttpHandler {
+@RestController
+public class SalesHttpHandler implements HttpHandler {
 
-  @PostMapping("/sales")
-  ResponseEntity<String> placeOrder(
-      @RequestBody PlaceOrderRequest request
-  );
+  private final PlaceOrderCommandService placeOrderCommandService;
+  private final ModifyOrderCommandService modifyOrderCommandService;
+  private final CancelOrderCommandService cancelOrderCommandService;
+  private final OrdersQueryService ordersQueryService;
 
-  @PatchMapping("/sales/{orderId}")
-  ResponseEntity<String> modifyOrder(
-      @PathVariable("orderId") String orderId,
-      @RequestBody ModifyOrderRequest request
-  );
-
-  @PatchMapping("/sales/{orderId}/cancel")
-  ResponseEntity<String> cancelOrder(
-      @PathVariable("orderId") String orderId,
-      @RequestBody CancelOrderRequest request
-  );
-
-  @GetMapping("/sales/{orderId}")
-  ResponseEntity<OrderResource> getOrder(
-      @PathVariable("orderId") String orderId
-  );
-
-  record OrderResource() {
+  public SalesHttpHandler(
+      PlaceOrderCommandService placeOrderCommandService,
+      ModifyOrderCommandService modifyOrderCommandService,
+      CancelOrderCommandService cancelOrderCommandService,
+      OrdersQueryService ordersQueryService) {
+    this.placeOrderCommandService = placeOrderCommandService;
+    this.modifyOrderCommandService = modifyOrderCommandService;
+    this.cancelOrderCommandService = cancelOrderCommandService;
+    this.ordersQueryService = ordersQueryService;
   }
 
-  record CancelOrderRequest() {
+  @Override public ResponseEntity<String> placeOrder(PlaceOrderRequest request) {
+    placeOrderCommandService.execute(request.toCommand());
+    return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  record ModifyOrderRequest() {
+  @Override public ResponseEntity<String> modifyOrder(String orderId, ModifyOrderRequest request) {
+    modifyOrderCommandService.execute(request.toCommand(orderId));
+    return ResponseEntity.ok().build();
   }
 
-  record PlaceOrderRequest() {
+  @Override public ResponseEntity<String> cancelOrder(String orderId, CancelOrderRequest request) {
+    cancelOrderCommandService.execute(request.toCommand(orderId));
+    return ResponseEntity.ok().build();
+  }
+
+  @Override public ResponseEntity<OrderResource> getOrder(String orderId) {
+    return ResponseEntity.ok(ordersQueryService.findByOrderId(orderId));
   }
 }
