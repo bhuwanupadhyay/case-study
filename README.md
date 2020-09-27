@@ -1,2 +1,2 @@
-# case-study
-Software Engineering Case Studies
+# Case Study - Modern Software Development Practices
+
