@@ -12,6 +12,8 @@
   <modules>
     <module>plugins</module>
     <module>domains</module>
+    <module>spring-boot-microservices</module>
+    <module>spring-boot-kotlin-microservices</module>
   </modules>
 
   <properties>
