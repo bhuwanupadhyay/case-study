@@ -16,6 +16,7 @@ public class CancelOrderCommandService implements CommandService<CancelOrderComm
 
   @Override public void execute(CancelOrderCommand command) {
     Order order = orders.find(new OrderId(command.orderId()));
+    order.on(command);
     orders.save(order);
   }
 }

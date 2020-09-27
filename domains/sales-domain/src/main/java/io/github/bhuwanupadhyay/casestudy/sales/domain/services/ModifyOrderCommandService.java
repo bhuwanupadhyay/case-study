@@ -16,6 +16,7 @@ public class ModifyOrderCommandService implements CommandService<ModifyOrderComm
 
   @Override public void execute(ModifyOrderCommand command) {
     Order order = orders.find(new OrderId(command.orderId()));
+    order.on(command);
     orders.save(order);
   }
 }
