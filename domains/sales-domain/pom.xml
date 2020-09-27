@@ -11,5 +11,14 @@
 
   <artifactId>sales-domain</artifactId>
 
+  <dependencies>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>archunit-code-qualtity-rules</artifactId>
+      <version>${project.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
 
 </project>

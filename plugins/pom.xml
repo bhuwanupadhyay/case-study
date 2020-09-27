@@ -12,7 +12,7 @@
   <artifactId>plugins</artifactId>
   <packaging>pom</packaging>
   <modules>
-    <module>archunit-maven-plugin</module>
+    <module>archunit-code-qualtity-rules</module>
   </modules>
 
 
