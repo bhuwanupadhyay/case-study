@@ -17,6 +17,7 @@
     <module>fulfillment-domain</module>
     <module>inventory-domain</module>
     <module>notification-domain</module>
+    <module>shared-kernel</module>
   </modules>
 
 
