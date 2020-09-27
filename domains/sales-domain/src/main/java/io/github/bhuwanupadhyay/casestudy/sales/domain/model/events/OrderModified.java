@@ -6,7 +6,7 @@ import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.Quanti
 import io.github.bhuwanupadhyay.ddd.DomainEvent;
 import java.util.Map;
 
-public record OrderPlaced(OrderId orderId,
-                          Map<ItemId, Quantity> orderItems) implements DomainEvent {
+public record OrderModified(OrderId orderId,
+                            Map<ItemId, Quantity> orderItems) implements DomainEvent {
 
 }
