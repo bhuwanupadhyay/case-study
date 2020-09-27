@@ -13,7 +13,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>sales-domain</module>
-    <module>shipping-domain</module>
+    <module>billing-domain</module>
     <module>fulfillment-domain</module>
     <module>inventory-domain</module>
     <module>notification-domain</module>
