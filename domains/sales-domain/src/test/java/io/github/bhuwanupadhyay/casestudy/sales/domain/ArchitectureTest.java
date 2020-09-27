@@ -13,5 +13,5 @@ public class ArchitectureTest {
   @ArchTest
   private final ArchRules basic_rules_are_respected = ArchRules.in(BasicRules.class);
   @ArchTest
-  private final ArchRules dependencies_are_respected = ArchRules.in(DomainRules.class);
+  private final ArchRules domain_rules_are_respected = ArchRules.in(DomainRules.class);
 }
