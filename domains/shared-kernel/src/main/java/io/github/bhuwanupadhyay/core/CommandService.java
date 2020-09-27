@@ -1,7 +1,7 @@
 package io.github.bhuwanupadhyay.core;
 
 @FunctionalInterface
-public interface CommandService<C, ID> {
+public interface CommandService<C> {
 
-    Result<ID> execute(ID id, C command);
+  void execute(C command);
 }
