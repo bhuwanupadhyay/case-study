@@ -16,6 +16,7 @@ public class ShipOrderCommandService implements CommandService<ShipOrderCommand>
 
   @Override public void execute(ShipOrderCommand command) {
     Shipping shipping = shippings.find(new ShippingId(command.shippingId()));
+    shipping.on(command);
     shippings.save(shipping);
   }
 }
