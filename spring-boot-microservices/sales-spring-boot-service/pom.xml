@@ -55,22 +55,51 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.jooq</groupId>
-        <artifactId>jooq-codegen-maven</artifactId>
-        <version>3.13.4</version>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.1.0</version>
         <executions>
           <execution>
-            <id>jooq-codegen</id>
+            <id>add-generated-source</id>
             <phase>generate-sources</phase>
             <goals>
-              <goal>generate</goal>
+              <goal>add-source</goal>
             </goals>
             <configuration>
-              <configurationFile>${project.basedir}/src/etc/jooq-config.xml</configurationFile>
+              <sources>
+                <source>${project.basedir}/src/main/generated</source>
+              </sources>
             </configuration>
           </execution>
         </executions>
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>codegen</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jooq</groupId>
+            <artifactId>jooq-codegen-maven</artifactId>
+            <version>3.13.4</version>
+            <executions>
+              <execution>
+                <id>jooq-codegen</id>
+                <phase>generate-sources</phase>
+                <goals>
+                  <goal>generate</goal>
+                </goals>
+                <configuration>
+                  <configurationFile>${project.basedir}/src/etc/jooq-config.xml</configurationFile>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

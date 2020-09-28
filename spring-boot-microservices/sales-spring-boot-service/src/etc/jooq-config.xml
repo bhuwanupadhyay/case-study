@@ -19,7 +19,7 @@
     <generate/>
     <target>
       <packageName>io.github.bhuwanupadhyay.casestudy.sales.jooq</packageName>
-      <directory>src/generated</directory>
+      <directory>src/main/generated</directory>
     </target>
   </generator>
 </configuration>
