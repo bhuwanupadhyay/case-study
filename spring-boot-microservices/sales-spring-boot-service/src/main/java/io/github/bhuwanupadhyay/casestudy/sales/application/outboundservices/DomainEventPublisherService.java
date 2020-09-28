@@ -23,7 +23,7 @@ public class DomainEventPublisherService implements DomainEventPublisher {
   public void publish(DomainEvent domainEvent) {
     Map<String, Object> headers = new HashMap<>();
     headers.put("X-Service", "Product");
-    eventSource.eventsOut()
-        .send(MessageBuilder.createMessage(domainEvent, new MessageHeaders(headers)));
+    //eventSource.eventsOut()
+    //    .send(MessageBuilder.createMessage(domainEvent, new MessageHeaders(headers)));
   }
 }
