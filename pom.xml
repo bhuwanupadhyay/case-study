@@ -66,8 +66,8 @@
           <release>${java.version}</release>
           <showDeprecation>true</showDeprecation>
           <showWarnings>true</showWarnings>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
+          <source>14</source>
+          <target>14</target>
           <verbose>true</verbose>
           <compilerArgs>--enable-preview</compilerArgs>
         </configuration>

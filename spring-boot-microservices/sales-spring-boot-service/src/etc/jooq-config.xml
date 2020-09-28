@@ -1,0 +1,25 @@
+<configuration xmlns="http://www.jooq.org/xsd/jooq-codegen-3.13.0.xsd">
+  <!-- Configure the database connection here -->
+  <jdbc>
+    <driver>org.postgresql.Driver</driver>
+    <url>jdbc:postgresql://localhost:5432/sales</url>
+    <user>sales</user>
+    <password>sales</password>
+  </jdbc>
+  <generator>
+    <database>
+      <name>org.jooq.meta.postgres.PostgresDatabase</name>
+      <includes>.*</includes>
+      <excludes>
+        DATABASECHANGELOG
+        | DATABASECHANGELOGLOCK
+      </excludes>
+      <inputSchema>public</inputSchema>
+    </database>
+    <generate/>
+    <target>
+      <packageName>io.github.bhuwanupadhyay.casestudy.sales.jooq</packageName>
+      <directory>target/generated-sources/annotations</directory>
+    </target>
+  </generator>
+</configuration>

@@ -12,6 +12,7 @@ import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.ModifyOrderComma
 import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.PlaceOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.model.events.OrderPlaced;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.OrderId;
+import io.github.bhuwanupadhyay.core.Problem;
 import io.github.bhuwanupadhyay.ddd.AggregateRoot;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -20,12 +21,16 @@ import java.util.Map;
 public class Order extends AggregateRoot<OrderId> {
 
   private final Map<ItemId, Quantity> orderLines = new LinkedHashMap<>();
-  private final CustomerId customerId;
+  private CustomerId customerId;
   private OrderStatus status;
   private CancellationReason cancellationReason;
 
-  public Order(OrderId orderId, PlaceOrderCommand command) {
+  public Order(OrderId orderId) {
     super(orderId);
+  }
+
+  public Order(OrderId orderId, PlaceOrderCommand command) {
+    this(orderId);
     for (Map.Entry<String, Integer> e : command.orderItems().entrySet()) {
       orderLines.put(new ItemId(e.getKey()), new Quantity(e.getValue()));
     }
@@ -62,5 +67,29 @@ public class Order extends AggregateRoot<OrderId> {
 
   public CancellationReason getCancellationReason() {
     return cancellationReason;
+  }
+
+  public Order withOptionalCancellationReason(CancellationReason reason) {
+    this.cancellationReason = reason;
+    return this;
+  }
+
+  public Order withStatus(OrderStatus status) {
+    Problem.notNull(status);
+    this.status = status;
+    return this;
+  }
+
+  public Order withCustomerId(CustomerId customerId) {
+    Problem.notNull(customerId);
+    this.customerId = customerId;
+    return this;
+  }
+
+  public Order withItem(ItemId itemId, Quantity quantity) {
+    Problem.notNull(itemId);
+    Problem.notNull(quantity);
+    this.orderLines.put(itemId, quantity);
+    return this;
   }
 }
