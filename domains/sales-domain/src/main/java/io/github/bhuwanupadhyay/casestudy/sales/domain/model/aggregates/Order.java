@@ -69,7 +69,7 @@ public class Order extends AggregateRoot<OrderId> {
     return cancellationReason;
   }
 
-  public Order withOptionalCancellationReason(CancellationReason reason) {
+  public Order withCancellationReason(CancellationReason reason) {
     this.cancellationReason = reason;
     return this;
   }
