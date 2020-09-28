@@ -1,2 +1,1 @@
-# case-study
-Software Engineering Case Studies
+# Software Engineering Case Studies
