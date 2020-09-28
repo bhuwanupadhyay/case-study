@@ -1,17 +1,17 @@
 package io.github.bhuwanupadhyay.casestudy.sales.domain.model.aggregates;
 
-import io.github.bhuwanupadhyay.casestudy.sales.domain.model.events.OrderCancelled;
-import io.github.bhuwanupadhyay.casestudy.sales.domain.model.events.OrderModified;
-import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.CancellationReason;
-import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.CustomerId;
-import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.ItemId;
-import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.OrderStatus;
-import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.Quantity;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.CancelOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.ModifyOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.PlaceOrderCommand;
+import io.github.bhuwanupadhyay.casestudy.sales.domain.model.events.OrderCancelled;
+import io.github.bhuwanupadhyay.casestudy.sales.domain.model.events.OrderModified;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.model.events.OrderPlaced;
+import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.CancellationReason;
+import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.CustomerId;
+import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.ItemId;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.OrderId;
+import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.OrderStatus;
+import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.Quantity;
 import io.github.bhuwanupadhyay.core.Problem;
 import io.github.bhuwanupadhyay.ddd.AggregateRoot;
 import java.util.Collections;

@@ -1,9 +1,9 @@
 package io.github.bhuwanupadhyay.casestudy.billing.domain.services;
 
+import io.github.bhuwanupadhyay.casestudy.billing.domain.commands.ModifyChargeCommand;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.aggregates.Billing;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.repositories.Billings;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.BillingId;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.commands.ModifyChargeCommand;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Rates;
 import io.github.bhuwanupadhyay.core.CommandService;
 import java.util.HashMap;

@@ -5,7 +5,7 @@ import com.tngtech.archunit.lang.ArchRule;
 import com.tngtech.archunit.lang.syntax.ArchRuleDefinition;
 
 public class DomainRules {
-  
+
   public static final String REPOSITORIES = "..domain.model.repositories..";
   public static final String AGGREGATES = "..domain.model.aggregates..";
   public static final String ENTITIES = "..domain.model.entities..";

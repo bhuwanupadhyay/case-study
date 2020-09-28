@@ -12,7 +12,7 @@
   <artifactId>domains</artifactId>
   <packaging>pom</packaging>
 
-    <modules>
+  <modules>
     <module>sales-domain</module>
     <module>billing-domain</module>
     <module>fulfillment-domain</module>
