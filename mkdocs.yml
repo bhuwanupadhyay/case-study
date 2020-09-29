@@ -1,4 +1,4 @@
-site_name: Case Study
+site_name: Microservice Architecture
 nav:
   - Home: index.md
   - About: about.md
