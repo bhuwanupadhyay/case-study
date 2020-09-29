@@ -1,0 +1,5 @@
+site_name: Case Study
+nav:
+  - Home: index.md
+  - About: about.md
+theme: readthedocs

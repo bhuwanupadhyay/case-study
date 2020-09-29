@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Mkdocs Install locally
+        run: |
+          pip install mkdocs
+
+      - name: 'Build site'
+        run: 'mkdocs build'
+
+      - name: 'Deploy to GitHub Pages'
+        uses: JamesIves/github-pages-deploy-action@3.4.8
+        with:
+          ACCESS_TOKEN: ${{ github.token }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: site # The folder the action should deploy.
