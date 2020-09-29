@@ -34,18 +34,6 @@ public class Billing extends AggregateRoot<BillingId> {
     this.registerEvent(new OrderBilled(this.getId(), this.orderId, this.billAmount));
   }
 
-  public void on(ModifyChargeCommand command, Rates rates) {
-    this.billAmount = getTotalPrice(rates, command.orderItems());
-    this.status = BillingStatus.CHARGED;
-    this.registerEvent(new ModificationBilled(this.getId(), this.orderId, this.billAmount));
-  }
-
-  public void on(RefundOrderCommand command) {
-    this.refundReason = new RefundReason(command.reason());
-    this.status = BillingStatus.REFUNDED;
-    this.registerEvent(new OrderRefunded(this.getId(), this.refundReason));
-  }
-
   private static BillAmount getTotalPrice(Rates rates, Map<String, Integer> orderItems) {
     BigDecimal amount = BigDecimal.ZERO;
     for (Map.Entry<String, Integer> e : orderItems.entrySet()) {
@@ -56,6 +44,18 @@ public class Billing extends AggregateRoot<BillingId> {
       amount = amount.add(totalQuantityAmount);
     }
     return new BillAmount(amount);
+  }
+
+  public void on(ModifyChargeCommand command, Rates rates) {
+    this.billAmount = getTotalPrice(rates, command.orderItems());
+    this.status = BillingStatus.CHARGED;
+    this.registerEvent(new ModificationBilled(this.getId(), this.orderId, this.billAmount));
+  }
+
+  public void on(RefundOrderCommand command) {
+    this.refundReason = new RefundReason(command.reason());
+    this.status = BillingStatus.REFUNDED;
+    this.registerEvent(new OrderRefunded(this.getId(), this.refundReason));
   }
 
   public RefundReason getRefundReason() {

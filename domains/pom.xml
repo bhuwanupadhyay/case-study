@@ -11,6 +11,7 @@
 
   <artifactId>domains</artifactId>
   <packaging>pom</packaging>
+
   <modules>
     <module>sales-domain</module>
     <module>billing-domain</module>

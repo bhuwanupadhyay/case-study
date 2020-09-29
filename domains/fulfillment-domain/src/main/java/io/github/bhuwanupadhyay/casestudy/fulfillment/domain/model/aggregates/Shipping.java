@@ -14,8 +14,8 @@ import io.github.bhuwanupadhyay.ddd.AggregateRoot;
 public class Shipping extends AggregateRoot<ShippingId> {
 
   private final OrderId orderId;
-  private ShippingStatus status;
   private final ShippingAddress shippingAddress;
+  private ShippingStatus status;
 
   public Shipping(ShippingId shippingId, PrepareShippingCommand command, Addresses addresses) {
     super(shippingId);

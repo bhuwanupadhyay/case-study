@@ -7,14 +7,14 @@ import io.github.bhuwanupadhyay.core.CommandService;
 
 public class PlaceOrderCommandService implements CommandService<PlaceOrderCommand> {
 
-  private final Orders billings;
+  private final Orders orders;
 
-  public PlaceOrderCommandService(Orders billings) {
-    this.billings = billings;
+  public PlaceOrderCommandService(Orders orders) {
+    this.orders = orders;
   }
 
   @Override public void execute(PlaceOrderCommand command) {
-    Order order = new Order(billings.nextId(), command);
-    billings.save(order);
+    Order order = new Order(orders.nextId(), command);
+    orders.save(order);
   }
 }
