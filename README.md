@@ -1,2 +1,2 @@
-# Case Study - Modern Software Development Practices
+# Microservice Architecture - Case Study
 
