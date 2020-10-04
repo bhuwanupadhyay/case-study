@@ -1,39 +1,24 @@
 package io.github.bhuwanupadhyay.casestudy.inventory.application.queryservices;
 
-import io.github.bhuwanupadhyay.casestudy.sales.jooq.tables.SaleOrderLines;
-import io.github.bhuwanupadhyay.casestudy.sales.jooq.tables.SaleOrders;
-import java.util.HashMap;
-import java.util.Map;
-import org.jooq.DSLContext;
-import org.jooq.Record3;
-import org.jooq.Result;
+import io.github.bhuwanupadhyay.casestudy.inventory.domain.InventoryId;
+import io.github.bhuwanupadhyay.casestudy.inventory.infrastructure.repositories.mybatis.dao.InventoryDao;
+import io.github.bhuwanupadhyay.casestudy.inventory.infrastructure.repositories.mybatis.dto.ItemDto;
+import io.github.bhuwanupadhyay.casestudy.inventory.interfaces.ItemResource;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
-import static io.github.bhuwanupadhyay.casestudy.sales.interfaces.HttpHandler.OrderResource;
-import static io.github.bhuwanupadhyay.casestudy.sales.jooq.Tables.SALE_ORDERS;
-import static io.github.bhuwanupadhyay.casestudy.sales.jooq.Tables.SALE_ORDER_LINES;
-
 @Service
-public class OrdersQueryService {
-  private static final SaleOrders ORDERS = SALE_ORDERS;
-  private static final SaleOrderLines ORDER_LINES = SALE_ORDER_LINES;
-  private final DSLContext context;
+public class InventoriesQueryService {
 
-  public OrdersQueryService(DSLContext context) {
-    this.context = context;
+  private final InventoryDao inventoryDao;
+
+  public InventoriesQueryService(InventoryDao inventoryDao) {
+    this.inventoryDao = inventoryDao;
   }
 
-  public OrderResource findByOrderId(String orderId) {
-    Result<Record3<String, String, Integer>> result =
-        this.context.select(ORDERS.ORDER_ID, ORDER_LINES.ITEM_ID, ORDER_LINES.QUANTITY)
-            .from(ORDER_LINES)
-            .join(ORDERS).on(ORDERS.ORDER_ID.eq(ORDER_LINES.ORDER_ID))
-            .where(ORDERS.ORDER_ID.eq(orderId))
-            .fetch();
-    Map<String, Integer> orderItems = new HashMap<>();
-    for (Record3<String, String, Integer> record3 : result) {
-      orderItems.put(record3.value2(), record3.value3());
-    }
-    return new OrderResource(orderId, orderItems);
+  public List<ItemResource> selectItems(InventoryId id) {
+    List<ItemDto> list = inventoryDao.selectItems(id);
+    return list.stream().map(ItemResource::new).collect(Collectors.toList());
   }
 }

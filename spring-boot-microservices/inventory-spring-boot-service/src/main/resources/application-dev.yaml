@@ -1,11 +1,6 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    username: sales
-    password: sales
-    url: jdbc:postgresql://localhost:5432/sales
-  rabbitmq:
-    username: user
-    password: bitnami
-    host: localhost
-    port: 5672
+    username: inventory
+    password: inventory
+    url: jdbc:postgresql://localhost:5432/inventory

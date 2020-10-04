@@ -1,7 +1,7 @@
-CREATE USER sales WITH PASSWORD 'sales' CREATEDB;
-CREATE DATABASE sales
+CREATE USER inventory WITH PASSWORD 'inventory' CREATEDB;
+CREATE DATABASE inventory
     WITH
-    OWNER = sales
+    OWNER = inventory
     ENCODING = 'UTF8'
     LC_COLLATE = 'en_US.utf8'
     LC_CTYPE = 'en_US.utf8'

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+    namespace="io.github.bhuwanupadhyay.casestudy.inventory.infrastructure.repositories.mybatis.mapper.ItemMapper">
+  <select id="selectItems" resultType="ItemDto">
+    select --\
+        item_name as itemName,
+        item_desc as itemDescription,
+        price as price,
+        quantity as quantity
+    from inventory_item as e
+    where --\
+      e.inventory_id = #{inventory_id}
+  </select>
+</mapper>

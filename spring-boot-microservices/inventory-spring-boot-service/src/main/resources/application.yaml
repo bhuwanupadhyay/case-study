@@ -1,13 +1,5 @@
 spring:
   profiles:
     active: dev
-  cloud:
-    stream:
-      bindings:
-        orderPlaced: # [MessageChannel]
-          destination: order.placed
-        orderModified: # [MessageChannel]
-          destination: order.modified
-        orderCancelled: # [MessageChannel]
-          destination: order.cancelled
-
+mybatis:
+  config-location: classpath:mybatis-config.xml
