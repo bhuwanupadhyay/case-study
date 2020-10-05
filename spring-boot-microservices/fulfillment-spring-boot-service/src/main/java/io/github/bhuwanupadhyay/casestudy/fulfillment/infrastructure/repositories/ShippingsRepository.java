@@ -3,30 +3,66 @@ package io.github.bhuwanupadhyay.casestudy.fulfillment.infrastructure.repositori
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.aggregates.Shipping;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.repositories.Shippings;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.OrderId;
+import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.ShippingAddress;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.ShippingId;
+import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.ShippingStatus;
+import io.github.bhuwanupadhyay.casestudy.fulfillment.infrastructure.repositories.jdbc.ShippingEntity;
+import io.github.bhuwanupadhyay.casestudy.fulfillment.infrastructure.repositories.jdbc.ShippingEntityRepository;
+import io.github.bhuwanupadhyay.ddd.DomainEntityNotFound;
 import io.github.bhuwanupadhyay.ddd.DomainEventPublisher;
+import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.UUID;
 import org.springframework.stereotype.Repository;
 
 @Repository
 public class ShippingsRepository extends Shippings {
-  protected ShippingsRepository(DomainEventPublisher publisher) {
+
+  private final ShippingEntityRepository repository;
+
+  public ShippingsRepository(DomainEventPublisher publisher,
+      ShippingEntityRepository repository) {
     super(publisher);
+    this.repository = repository;
   }
 
   @Override public Shipping findByOrderId(OrderId orderId) {
-    return null;
+    return repository.findByOrderId(orderId.value())
+        .map(this::toShipping)
+        .orElseThrow(() -> new DomainEntityNotFound("[By OrderId]", orderId));
   }
 
   @Override public Optional<Shipping> findOne(ShippingId shippingId) {
-    return Optional.empty();
+    return repository.findByShippingId(shippingId.value())
+        .map(this::toShipping);
   }
 
   @Override protected void persist(Shipping entity) {
-
+    Optional<ShippingEntity> findOne = repository.findByShippingId(entity.getId().value());
+    ShippingEntity db;
+    if (findOne.isPresent()) {
+      db = findOne.get();
+    } else {
+      entity.setCreatedAt(LocalDateTime.now());
+      db = new ShippingEntity();
+      db.setOrderId(entity.getOrderId().value());
+      db.setShippingId(entity.getId().value());
+      db.setCreatedAt(entity.getCreatedAt());
+    }
+    db.setStatus(entity.getStatus().name());
+    db.setShippingAddress(entity.getShippingAddress().value());
+    repository.save(db);
   }
 
   @Override public ShippingId nextId() {
-    return null;
+    return new ShippingId(UUID.randomUUID().toString());
+  }
+
+  private Shipping toShipping(ShippingEntity e) {
+    Shipping shipping =
+        new Shipping(new ShippingId(e.getShippingId()), new OrderId(e.getOrderId()),
+            new ShippingAddress(e.getShippingAddress()));
+    shipping.setCreatedAt(e.getCreatedAt());
+    return shipping.withStatus(ShippingStatus.valueOf(e.getStatus()));
   }
 }

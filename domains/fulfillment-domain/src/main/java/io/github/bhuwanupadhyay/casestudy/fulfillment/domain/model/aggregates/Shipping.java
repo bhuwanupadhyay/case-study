@@ -11,6 +11,7 @@ import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.ShippingAddress;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.ShippingId;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.ShippingStatus;
+import io.github.bhuwanupadhyay.core.Problem;
 import io.github.bhuwanupadhyay.ddd.AggregateRoot;
 import java.util.Objects;
 
@@ -19,6 +20,15 @@ public class Shipping extends AggregateRoot<ShippingId> {
   private final OrderId orderId;
   private final ShippingAddress shippingAddress;
   private ShippingStatus status;
+
+  public Shipping(
+      ShippingId shippingId,
+      OrderId orderId,
+      ShippingAddress shippingAddress) {
+    super(shippingId);
+    this.orderId = orderId;
+    this.shippingAddress = shippingAddress;
+  }
 
   public Shipping(ShippingId shippingId, PrepareShippingCommand command, Addresses addresses) {
     super(shippingId);
@@ -54,5 +64,11 @@ public class Shipping extends AggregateRoot<ShippingId> {
 
   public boolean isNotShipped() {
     return !Objects.equals(this.status, ShippingStatus.SHIPPED);
+  }
+
+  public Shipping withStatus(ShippingStatus status) {
+    Problem.notNull(status);
+    this.status = status;
+    return this;
   }
 }

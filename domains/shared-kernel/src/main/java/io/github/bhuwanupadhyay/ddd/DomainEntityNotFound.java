@@ -4,8 +4,8 @@ public final class DomainEntityNotFound extends RuntimeException {
 
   private final ValueObject id;
 
-  public DomainEntityNotFound(String repository, ValueObject id) {
-    super(String.format("[%s] Entity not found by id: %s", repository, id));
+  public DomainEntityNotFound(String prior, ValueObject id) {
+    super(String.format("[%s] Entity not found by id: %s", prior, id));
     this.id = id;
   }
 
