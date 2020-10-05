@@ -1,0 +1,20 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+  <changeSet author="service" id="v1-1">
+    <createTable tableName="billings">
+      <column autoIncrement="true" name="id" type="BIGINT">
+        <constraints nullable="false" primaryKey="true" primaryKeyName="pk_billings"/>
+      </column>
+      <column name="billing_id" type="VARCHAR(36)">
+        <constraints nullable="false" unique="true"/>
+      </column>
+      <column name="status" type="VARCHAR(100)"/>
+      <column name="refund_reason" type="VARCHAR(255)"/>
+      <column name="bill_amount" type="DECIMAL"/>
+      <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+    </createTable>
+  </changeSet>
+</databaseChangeLog>

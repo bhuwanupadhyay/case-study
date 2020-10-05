@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: billing
+    password: billing
+    url: jdbc:postgresql://localhost:5432/billing
+  rabbitmq:
+    username: user
+    password: bitnami
+    host: localhost
+    port: 5672

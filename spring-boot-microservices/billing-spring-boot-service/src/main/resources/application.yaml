@@ -1,0 +1,20 @@
+spring:
+  profiles:
+    active: dev
+  cloud:
+    stream:
+      bindings:
+        orderPlaced: # [SubscribableChannel]
+          destination: order.placed
+          group: billing
+        orderModified: # [SubscribableChannel]
+          destination: order.modified
+          group: billing
+        orderCancelled: # [SubscribableChannel]
+          destination: order.cancelled
+          group: billing
+        orderBilled: # [MessageChannel]
+          destination: order.billed
+        modificationBilled: # [MessageChannel]
+          destination: modification.billed
+
