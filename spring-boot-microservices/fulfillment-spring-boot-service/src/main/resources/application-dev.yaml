@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: fulfillment
+    password: fulfillment
+    url: jdbc:postgresql://localhost:5432/fulfillment
+  rabbitmq:
+    username: user
+    password: bitnami
+    host: localhost
+    port: 5672

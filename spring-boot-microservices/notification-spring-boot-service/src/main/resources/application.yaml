@@ -1,0 +1,16 @@
+spring:
+  profiles:
+    active: dev
+  cloud:
+    stream:
+      bindings:
+        orderPlaced: # [SubscribableChannel]
+          destination: order.placed
+          group: notification
+        orderShipped: # [SubscribableChannel]
+          destination: order.shipped
+          group: notification
+        orderRefunded: # [SubscribableChannel]
+          destination: order.refunded
+          group: notification
+

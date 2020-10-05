@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    username: notification
+    password: notification
+    url: jdbc:postgresql://localhost:5432/notification
+  rabbitmq:
+    username: user
+    password: bitnami
+    host: localhost
+    port: 5672
