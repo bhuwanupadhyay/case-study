@@ -15,6 +15,7 @@ import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Pric
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Quantity;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Rates;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.RefundReason;
+import io.github.bhuwanupadhyay.core.Problem;
 import io.github.bhuwanupadhyay.ddd.AggregateRoot;
 import java.math.BigDecimal;
 import java.util.Map;
@@ -25,6 +26,11 @@ public class Billing extends AggregateRoot<BillingId> {
   private BillAmount billAmount;
   private BillingStatus status;
   private RefundReason refundReason;
+
+  public Billing(BillingId billingId, OrderId orderId) {
+    super(billingId);
+    this.orderId = orderId;
+  }
 
   public Billing(BillingId billingId, ChargeOrderCommand command, Rates rates) {
     super(billingId);
@@ -72,5 +78,22 @@ public class Billing extends AggregateRoot<BillingId> {
 
   public BillingStatus getStatus() {
     return status;
+  }
+
+  public Billing withAmount(BillAmount billAmount) {
+    Problem.notNull(billAmount);
+    this.billAmount = billAmount;
+    return this;
+  }
+
+  public Billing withRefundReason(RefundReason refundReason) {
+    this.refundReason = refundReason;
+    return this;
+  }
+
+  public Billing withStatus(BillingStatus status) {
+    Problem.notNull(status);
+    this.status = status;
+    return this;
   }
 }

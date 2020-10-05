@@ -1,5 +1,7 @@
 package io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.aggregates;
 
+import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.CancelShippingCommand;
+import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.ModifyOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.PrepareShippingCommand;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.ShipOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.events.OrderShipped;
@@ -27,6 +29,14 @@ public class Shipping extends AggregateRoot<ShippingId> {
   public void on(ShipOrderCommand command) {
     this.status = ShippingStatus.SHIPPED;
     this.registerEvent(new OrderShipped(this.getId(), this.orderId, this.shippingAddress));
+  }
+
+  public void on(ModifyOrderCommand command) {
+    this.status = ShippingStatus.PREPARED;
+  }
+
+  public void on(CancelShippingCommand command) {
+    this.status = ShippingStatus.CANCELLED;
   }
 
   public OrderId getOrderId() {

@@ -1,5 +1,6 @@
 package io.github.bhuwanupadhyay.casestudy.fulfillment.domain.services;
 
+import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.CancelShippingCommand;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.ModifyOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.PrepareShippingCommand;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.aggregates.Shipping;
@@ -9,23 +10,17 @@ import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.
 import io.github.bhuwanupadhyay.core.CommandService;
 import java.util.Objects;
 
-public class ModifyShippingCommandService implements CommandService<ModifyOrderCommand> {
+public class CancelShippingCommandService implements CommandService<CancelShippingCommand> {
 
   private final Shippings shippings;
-  private final PrepareShippingCommandService prepareShippingCommandService;
 
-  public ModifyShippingCommandService(Shippings shippings,
-      PrepareShippingCommandService prepareShippingCommandService) {
+  public CancelShippingCommandService(Shippings shippings) {
     this.shippings = shippings;
-    this.prepareShippingCommandService = prepareShippingCommandService;
   }
 
-  @Override public void execute(ModifyOrderCommand command) {
+  @Override public void execute(CancelShippingCommand command) {
     Shipping shipping = shippings.findByOrderId(new OrderId(command.orderId()));
-    if (Objects.equals(shipping.getStatus(), ShippingStatus.SHIPPED)) {
-      this.prepareShippingCommandService.execute(
-          new PrepareShippingCommand(command.orderId(), command.orderItems()));
-    } else {
+    if (!Objects.equals(shipping.getStatus(), ShippingStatus.SHIPPED)) {
       shipping.on(command);
       shippings.save(shipping);
     }

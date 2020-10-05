@@ -3,7 +3,7 @@ package io.github.bhuwanupadhyay.casestudy.fulfillment.domain.services;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.ShipOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.aggregates.Shipping;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.repositories.Shippings;
-import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.ShippingId;
+import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.OrderId;
 import io.github.bhuwanupadhyay.core.CommandService;
 
 public class ShipOrderCommandService implements CommandService<ShipOrderCommand> {
@@ -15,7 +15,7 @@ public class ShipOrderCommandService implements CommandService<ShipOrderCommand>
   }
 
   @Override public void execute(ShipOrderCommand command) {
-    Shipping shipping = shippings.find(new ShippingId(command.shippingId()));
+    Shipping shipping = shippings.findByOrderId(new OrderId(command.orderId()));
     shipping.on(command);
     shippings.save(shipping);
   }
