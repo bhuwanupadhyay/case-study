@@ -25,4 +25,7 @@ public interface EventSource {
 
   @Output("modificationBilled")
   MessageChannel modificationBilled();
+
+  @Output("orderRefunded")
+  MessageChannel orderRefunded();
 }

@@ -1,12 +1,10 @@
-package io.github.bhuwanupadhyay.casestudy.billing.application.outboundservices;
+package io.github.bhuwanupadhyay.casestudy.notification.application.outboundservices;
 
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.events.ModificationBilled;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.events.OrderBilled;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.model.events.OrderRefunded;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.BillAmount;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.BillingId;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.OrderId;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.RefundReason;
 import io.github.bhuwanupadhyay.casestudy.billing.infrastructure.brokers.EventSource;
 import io.github.bhuwanupadhyay.ddd.DomainEvent;
 import io.github.bhuwanupadhyay.ddd.DomainEventPublisher;
@@ -42,10 +40,6 @@ public class DomainEventPublisherService implements DomainEventPublisher {
           toPayload(modificationBilled.billingId(), modificationBilled.orderId(),
               modificationBilled.billAmount());
       eventSource.modificationBilled().send(MessageBuilder.createMessage(payload, headers));
-    } else if (domainEvent instanceof OrderRefunded orderRefunded) {
-      Map<String, Object> payload =
-          toPayload(orderRefunded.billingId(), orderRefunded.refundReason());
-      eventSource.modificationBilled().send(MessageBuilder.createMessage(payload, headers));
     }
   }
 
@@ -55,13 +49,6 @@ public class DomainEventPublisherService implements DomainEventPublisher {
     payload.put("billingId", billingId.value());
     payload.put("orderId", orderId.value());
     payload.put("billAmount", billAmount.amount());
-    return payload;
-  }
-
-  private Map<String, Object> toPayload(BillingId billingId, RefundReason refundReason) {
-    Map<String, Object> payload = new HashMap<>();
-    payload.put("billingId", billingId.value());
-    payload.put("refundReason", refundReason.value());
     return payload;
   }
 }
