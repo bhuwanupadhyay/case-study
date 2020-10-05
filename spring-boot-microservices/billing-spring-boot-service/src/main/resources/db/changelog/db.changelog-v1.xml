@@ -11,6 +11,9 @@
       <column name="billing_id" type="VARCHAR(36)">
         <constraints nullable="false" unique="true"/>
       </column>
+      <column name="order_id" type="VARCHAR(36)">
+        <constraints nullable="false" unique="true"/>
+      </column>
       <column name="status" type="VARCHAR(100)"/>
       <column name="refund_reason" type="VARCHAR(255)"/>
       <column name="bill_amount" type="DECIMAL"/>

@@ -16,6 +16,7 @@
     <module>sales-spring-boot-service</module>
     <module>inventory-spring-boot-service</module>
     <module>billing-spring-boot-service</module>
+    <module>fulfillment-spring-boot-service</module>
   </modules>
 
   <properties>

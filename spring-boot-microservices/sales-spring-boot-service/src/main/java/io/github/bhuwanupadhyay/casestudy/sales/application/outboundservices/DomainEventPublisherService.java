@@ -40,7 +40,7 @@ public class DomainEventPublisherService implements DomainEventPublisher {
       eventSource.orderModified().send(MessageBuilder.createMessage(payload, headers));
     } else if (domainEvent instanceof OrderCancelled orderCancelled) {
       Map<String, Object> payload = toPayload(orderCancelled.orderId());
-      payload.put("cancellationReason", orderCancelled.cancellationReason());
+      payload.put("cancellationReason", orderCancelled.cancellationReason().value());
       eventSource.orderCancelled().send(MessageBuilder.createMessage(domainEvent, headers));
     }
   }
@@ -58,7 +58,7 @@ public class DomainEventPublisherService implements DomainEventPublisher {
 
   private Map<String, Object> toPayload(OrderId orderId) {
     Map<String, Object> payload = new HashMap<>();
-    payload.put("orderId", orderId);
+    payload.put("orderId", orderId.value());
     return payload;
   }
 }
