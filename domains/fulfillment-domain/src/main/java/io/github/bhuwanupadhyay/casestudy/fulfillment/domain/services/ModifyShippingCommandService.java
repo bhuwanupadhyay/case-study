@@ -5,9 +5,7 @@ import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.PrepareShi
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.aggregates.Shipping;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.repositories.Shippings;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.OrderId;
-import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.ShippingStatus;
 import io.github.bhuwanupadhyay.core.CommandService;
-import java.util.Objects;
 
 public class ModifyShippingCommandService implements CommandService<ModifyOrderCommand> {
 
@@ -22,12 +20,12 @@ public class ModifyShippingCommandService implements CommandService<ModifyOrderC
 
   @Override public void execute(ModifyOrderCommand command) {
     Shipping shipping = shippings.findByOrderId(new OrderId(command.orderId()));
-    if (Objects.equals(shipping.getStatus(), ShippingStatus.SHIPPED)) {
-      this.prepareShippingCommandService.execute(
-          new PrepareShippingCommand(command.orderId(), command.orderItems()));
-    } else {
+    if (shipping.isNotShipped()) {
       shipping.on(command);
       shippings.save(shipping);
+    } else {
+      this.prepareShippingCommandService.execute(
+          new PrepareShippingCommand(command.orderId(), command.orderItems()));
     }
   }
 }

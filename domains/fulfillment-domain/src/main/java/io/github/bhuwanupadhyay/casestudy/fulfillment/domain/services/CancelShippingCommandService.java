@@ -20,7 +20,7 @@ public class CancelShippingCommandService implements CommandService<CancelShippi
 
   @Override public void execute(CancelShippingCommand command) {
     Shipping shipping = shippings.findByOrderId(new OrderId(command.orderId()));
-    if (!Objects.equals(shipping.getStatus(), ShippingStatus.SHIPPED)) {
+    if (shipping.isNotShipped()) {
       shipping.on(command);
       shippings.save(shipping);
     }

@@ -12,6 +12,7 @@ import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.ShippingId;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.ShippingStatus;
 import io.github.bhuwanupadhyay.ddd.AggregateRoot;
+import java.util.Objects;
 
 public class Shipping extends AggregateRoot<ShippingId> {
 
@@ -49,5 +50,9 @@ public class Shipping extends AggregateRoot<ShippingId> {
 
   public ShippingAddress getShippingAddress() {
     return shippingAddress;
+  }
+
+  public boolean isNotShipped() {
+    return !Objects.equals(this.status, ShippingStatus.SHIPPED);
   }
 }
