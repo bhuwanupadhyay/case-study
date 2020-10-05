@@ -1,4 +1,4 @@
-package io.github.bhuwanupadhyay.casestudy.billing.infrastructure.brokers;
+package io.github.bhuwanupadhyay.casestudy.fulfillment.infrastructure.brokers;
 
 import org.springframework.cloud.stream.annotation.Input;
 import org.springframework.cloud.stream.annotation.Output;
@@ -10,6 +10,8 @@ public interface EventSource {
   String ORDER_PLACED = "orderPlaced";
   String ORDER_MODIFIED = "orderModified";
   String ORDER_CANCELLED = "orderCancelled";
+  String MODIFICATION_BILLED = "modificationBilled";
+  String ORDER_BILLED = "orderBilled";
 
   @Input(ORDER_PLACED)
   SubscribableChannel orderPlaced();
@@ -20,9 +22,12 @@ public interface EventSource {
   @Input(ORDER_CANCELLED)
   SubscribableChannel orderCancelled();
 
-  @Output("orderBilled")
-  MessageChannel orderBilled();
+  @Input(ORDER_BILLED)
+  SubscribableChannel orderBilled();
 
-  @Output("modificationBilled")
-  MessageChannel modificationBilled();
+  @Input(MODIFICATION_BILLED)
+  SubscribableChannel modificationBilled();
+
+  @Output("orderShipped")
+  MessageChannel orderShipped();
 }
