@@ -45,7 +45,7 @@ public class DomainEventPublisherService implements DomainEventPublisher {
     } else if (domainEvent instanceof OrderRefunded orderRefunded) {
       Map<String, Object> payload =
           toPayload(orderRefunded.billingId(), orderRefunded.refundReason());
-      eventSource.modificationBilled().send(MessageBuilder.createMessage(payload, headers));
+      eventSource.orderRefunded().send(MessageBuilder.createMessage(payload, headers));
     }
   }
 

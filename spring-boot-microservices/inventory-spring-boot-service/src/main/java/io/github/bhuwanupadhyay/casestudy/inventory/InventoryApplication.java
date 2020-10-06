@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @SpringBootApplication
 @EnableCaching
 @EnableTransactionManagement
-public class Application {
+public class InventoryApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    SpringApplication.run(InventoryApplication.class, args);
   }
 }

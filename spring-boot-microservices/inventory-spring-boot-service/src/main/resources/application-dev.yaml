@@ -4,3 +4,5 @@ spring:
     username: inventory
     password: inventory
     url: jdbc:postgresql://localhost:5432/inventory
+server:
+  port: 8082

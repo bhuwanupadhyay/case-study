@@ -9,3 +9,5 @@ spring:
     password: bitnami
     host: localhost
     port: 5672
+server:
+  port: 8081

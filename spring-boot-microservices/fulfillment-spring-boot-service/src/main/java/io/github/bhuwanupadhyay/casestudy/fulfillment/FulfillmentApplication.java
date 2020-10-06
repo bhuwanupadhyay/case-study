@@ -15,9 +15,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableCaching
 @EnableScheduling
 @EnableTransactionManagement
-public class Application {
+public class FulfillmentApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    SpringApplication.run(FulfillmentApplication.class, args);
   }
 }

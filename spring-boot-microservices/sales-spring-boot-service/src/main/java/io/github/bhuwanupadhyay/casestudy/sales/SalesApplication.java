@@ -1,6 +1,6 @@
-package io.github.bhuwanupadhyay.casestudy.notification;
+package io.github.bhuwanupadhyay.casestudy.sales;
 
-import io.github.bhuwanupadhyay.casestudy.notification.infrastructure.brokers.EventSource;
+import io.github.bhuwanupadhyay.casestudy.sales.infrastructure.brokers.EventSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -15,9 +15,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableCaching
 @EnableScheduling
 @EnableTransactionManagement
-public class Application {
+public class SalesApplication {
 
   public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
+    SpringApplication.run(SalesApplication.class, args);
   }
 }

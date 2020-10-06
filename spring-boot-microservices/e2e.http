@@ -1,0 +1,12 @@
+### OrderPlaced
+
+http://localhost:8080/sales
+Content-Type: application/json
+
+{
+  "orderItems": {
+    "1": 2,
+    "5": 3
+  },
+  "customerId": "1"
+}

@@ -17,4 +17,6 @@ spring:
           destination: order.billed
         modificationBilled: # [MessageChannel]
           destination: modification.billed
+        orderRefunded: # [MessageChannel]
+          destination: order.refunded
 
