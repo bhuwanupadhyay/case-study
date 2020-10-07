@@ -12,7 +12,7 @@ public class CommandServiceConfiguration {
 
   @Bean
   public ChargeOrderCommandService chargeOrderCommandService(Billings billings) {
-    return new ChargeOrderCommandService(billings);
+    return new ChargeOrderCommandService(billings, inventoryService);
   }
 
   @Bean
