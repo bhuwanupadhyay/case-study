@@ -2,6 +2,7 @@ package io.github.bhuwanupadhyay.casestudy.billing.infrastructure.configurations
 
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.repositories.Billings;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.services.ChargeOrderCommandService;
+import io.github.bhuwanupadhyay.casestudy.billing.domain.services.InventoryService;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.services.ModifyChargeCommandService;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.services.RefundOrderCommandService;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 public class CommandServiceConfiguration {
 
   @Bean
-  public ChargeOrderCommandService chargeOrderCommandService(Billings billings) {
+  public ChargeOrderCommandService chargeOrderCommandService(Billings billings, InventoryService inventoryService) {
     return new ChargeOrderCommandService(billings, inventoryService);
   }
 
