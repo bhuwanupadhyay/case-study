@@ -1,6 +1,7 @@
 package io.github.bhuwanupadhyay.casestudy.sales.application.queryservices;
 
 import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.OrderItem;
+import io.github.bhuwanupadhyay.casestudy.sales.interfaces.HttpHandler.OrderItemResource;
 import io.github.bhuwanupadhyay.casestudy.sales.jooq.tables.SaleOrderLines;
 import io.github.bhuwanupadhyay.casestudy.sales.jooq.tables.SaleOrders;
 import java.util.ArrayList;
@@ -28,9 +29,9 @@ public record OrdersQueryService(DSLContext context) {
             .join(ORDERS).on(ORDERS.ORDER_ID.eq(ORDER_LINES.ORDER_ID))
             .where(ORDERS.ORDER_ID.eq(orderId))
             .fetch();
-    List<OrderItem> orderItems = new ArrayList<>();
+    List<OrderItemResource> orderItems = new ArrayList<>();
     for (Record3<String, String, Integer> record3 : orderById) {
-      orderItems.add(new OrderItem(record3.value2(), record3.value3()));
+      orderItems.add(new OrderItemResource(record3.value2(), record3.value3()));
     }
     return new OrderResource(orderId, orderItems);
   }
@@ -47,9 +48,9 @@ public record OrdersQueryService(DSLContext context) {
     List<OrderResource> result = new ArrayList<>();
 
     for (Map.Entry<String, List<Record3<String, String, Integer>>> e : groupByOrderId.entrySet()) {
-      List<OrderItem> orderItems = new ArrayList<>();
+      List<OrderItemResource> orderItems = new ArrayList<>();
       for (Record3<String, String, Integer> record3 : e.getValue()) {
-        orderItems.add(new OrderItem(record3.value2(), record3.value3()));
+        orderItems.add(new OrderItemResource(record3.value2(), record3.value3()));
       }
       result.add(new OrderResource(e.getKey(), orderItems));
     }

@@ -4,6 +4,7 @@ import io.github.bhuwanupadhyay.casestudy.billing.domain.commands.ModifyChargeCo
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.aggregates.Billing;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.repositories.Billings;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.BillingId;
+import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.OrderId;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Rates;
 import io.github.bhuwanupadhyay.core.CommandService;
 
@@ -18,8 +19,8 @@ public class ModifyChargeCommandService implements CommandService<ModifyChargeCo
   }
 
   @Override public void execute(ModifyChargeCommand command) {
+    Billing billing = billings.findByOrderId(new OrderId(command.orderId()));
     Rates rates = ServiceUtils.getRates(inventoryService, command.orderItems());
-    Billing billing = billings.find(new BillingId(command.billId()));
     billing.on(command, rates);
     billings.save(billing);
   }

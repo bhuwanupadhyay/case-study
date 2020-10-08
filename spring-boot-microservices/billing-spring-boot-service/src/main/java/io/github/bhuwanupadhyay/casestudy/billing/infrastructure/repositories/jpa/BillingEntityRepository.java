@@ -7,5 +7,5 @@ public interface BillingEntityRepository extends JpaRepository<BillingEntity, Lo
 
   Optional<BillingEntity> findByBillingId(String billingId);
 
-  boolean existsByBillingId(String billingId);
+  Optional<BillingEntity> findByOrderId(String orderId);
 }
