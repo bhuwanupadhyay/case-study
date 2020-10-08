@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 public interface HttpHandler {
 
-  @GetMapping("/inventories/{inventoryId}/items")
-  List<ItemResource> getItems(@PathVariable("inventoryId") String inventoryId);
+  @GetMapping("/items")
+  List<ItemResource> getItems();
+
+  @GetMapping("/items/{itemId}")
+  ItemResource getItem(@PathVariable("itemId") String itemId);
 }

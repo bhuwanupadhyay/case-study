@@ -1,7 +1,7 @@
 package io.github.bhuwanupadhyay.casestudy.billing.application.outboundservices.acl;
 
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.ItemId;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.ItemInfo;
+import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.ItemPriceInfo;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Price;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.services.InventoryService;
 import io.github.bhuwanupadhyay.casestudy.billing.infrastructure.services.http.InventoryServiceClient;
@@ -20,8 +20,8 @@ public class ExternalInventoryService implements InventoryService {
 
   @Override
   @Async
-  public CompletableFuture<ItemInfo> getItemPrice(ItemId itemId) {
+  public CompletableFuture<ItemPriceInfo> getItemPrice(ItemId itemId) {
     Price price = new Price(inventoryServiceClient.getItemInfo(itemId.value()).price());
-    return CompletableFuture.completedFuture(new ItemInfo(itemId, price));
+    return CompletableFuture.completedFuture(new ItemPriceInfo(itemId, price));
   }
 }

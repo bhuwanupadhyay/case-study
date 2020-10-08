@@ -2,6 +2,7 @@ package io.github.bhuwanupadhyay.casestudy.billing.domain.model.aggregates;
 
 import io.github.bhuwanupadhyay.casestudy.billing.domain.commands.ChargeOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.commands.ModifyChargeCommand;
+import io.github.bhuwanupadhyay.casestudy.billing.domain.commands.OrderItem;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.commands.RefundOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.events.ModificationBilled;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.events.OrderBilled;
@@ -20,7 +21,7 @@ import io.github.bhuwanupadhyay.core.Problem;
 import io.github.bhuwanupadhyay.core.SimpleProblem;
 import io.github.bhuwanupadhyay.ddd.AggregateRoot;
 import java.math.BigDecimal;
-import java.util.Map;
+import java.util.List;
 
 public class Billing extends AggregateRoot<BillingId> {
 
@@ -42,14 +43,14 @@ public class Billing extends AggregateRoot<BillingId> {
     this.registerEvent(new OrderBilled(this.getId(), this.orderId, this.billAmount));
   }
 
-  private static BillAmount getTotalPrice(Rates rates, Map<String, Integer> orderItems) {
+  private static BillAmount getTotalPrice(Rates rates, List<OrderItem> orderItems) {
     BigDecimal amount = BigDecimal.ZERO;
-    for (Map.Entry<String, Integer> e : orderItems.entrySet()) {
-      ItemId key = new ItemId(e.getKey());
+    for (OrderItem e : orderItems) {
+      ItemId key = new ItemId(e.itemId());
       Price price = rates.getByItemId(key)
           .orElseThrow(() -> new BadRequestException(
               new SimpleProblem("orderItems." + key, "price.not.found")));
-      Quantity quantity = new Quantity(e.getValue());
+      Quantity quantity = new Quantity(e.quantity());
       BigDecimal totalQuantityAmount = price.value().multiply(new BigDecimal(quantity.value()));
       amount = amount.add(totalQuantityAmount);
     }

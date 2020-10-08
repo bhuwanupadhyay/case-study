@@ -2,9 +2,10 @@ package io.github.bhuwanupadhyay.casestudy.billing.interfaces;
 
 import io.github.bhuwanupadhyay.casestudy.billing.domain.commands.ChargeOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.commands.ModifyChargeCommand;
+import io.github.bhuwanupadhyay.casestudy.billing.domain.commands.OrderItem;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.commands.RefundOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.billing.infrastructure.brokers.EventSource;
-import java.util.Map;
+import java.util.List;
 import org.springframework.cloud.stream.annotation.StreamListener;
 
 public interface EventHandler {
@@ -19,7 +20,7 @@ public interface EventHandler {
   void on(OrderCancelledPayload payload);
 
   record OrderPlacedPayload(String orderId,
-                            Map<String, Integer> orderItems) {
+                            List<OrderItem> orderItems) {
     public ChargeOrderCommand toCommand() {
       return new ChargeOrderCommand(
           this.orderId(),
@@ -29,7 +30,7 @@ public interface EventHandler {
   }
 
   record OrderModifiedPayload(String orderId,
-                              Map<String, Integer> orderItems) {
+                              List<OrderItem> orderItems) {
     public ModifyChargeCommand toCommand() {
       return new ModifyChargeCommand(
           this.orderId(),

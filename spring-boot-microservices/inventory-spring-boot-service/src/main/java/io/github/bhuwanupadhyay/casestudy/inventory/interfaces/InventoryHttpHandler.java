@@ -1,7 +1,7 @@
 package io.github.bhuwanupadhyay.casestudy.inventory.interfaces;
 
 import io.github.bhuwanupadhyay.casestudy.inventory.application.queryservices.InventoriesQueryService;
-import io.github.bhuwanupadhyay.casestudy.inventory.domain.InventoryId;
+import io.github.bhuwanupadhyay.casestudy.inventory.domain.ItemId;
 import java.util.List;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +15,13 @@ public class InventoryHttpHandler implements HttpHandler {
   }
 
   @Override
-  public List<ItemResource> getItems(String inventoryId) {
-    return inventoriesQueryService.selectItems(new InventoryId(inventoryId));
+  public List<ItemResource> getItems() {
+    return inventoriesQueryService.selectItems();
+  }
+
+  @Override public ItemResource getItem(String itemId) {
+    return inventoriesQueryService.selectItem(new ItemId(itemId))
+        .map(ItemResource::new)
+        .orElseThrow(() -> new NotFoundException(""));
   }
 }

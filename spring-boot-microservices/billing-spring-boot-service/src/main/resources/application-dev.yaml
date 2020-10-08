@@ -11,3 +11,9 @@ spring:
     port: 5672
 server:
   port: 8084
+
+###########################
+#   APP PROPERTIES        #
+###########################
+InventoryService:
+  url: http://localhost:8082

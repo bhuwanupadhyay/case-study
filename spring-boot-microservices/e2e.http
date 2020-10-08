@@ -4,9 +4,11 @@ POST http://localhost:8080/sales
 Content-Type: application/json
 
 {
-  "orderItems": {
-    "1": 2,
-    "5": 3
-  },
+  "orderItems": [
+    {
+      "itemId": "1",
+      "quantity": 3
+    }
+  ],
   "customerId": "1"
 }

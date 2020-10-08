@@ -9,7 +9,9 @@ import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.Quanti
 import io.github.bhuwanupadhyay.casestudy.sales.infrastructure.brokers.EventSource;
 import io.github.bhuwanupadhyay.ddd.DomainEvent;
 import io.github.bhuwanupadhyay.ddd.DomainEventPublisher;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.MessageHeaders;
@@ -47,10 +49,12 @@ public class DomainEventPublisherService implements DomainEventPublisher {
 
   private Map<String, Object> toPayload(OrderId orderId, Map<ItemId, Quantity> orderItems) {
     Map<String, Object> payload = toPayload(orderId);
-    Map<Object, Object> items = new HashMap<>();
+    List<Map<String, Object>> items = new ArrayList<>();
     for (Map.Entry<ItemId, Quantity> e : orderItems.entrySet()) {
-      items.put("itemId", e.getKey().value());
-      items.put("quantity", e.getValue().value());
+      Map<String, Object> item = new HashMap<>();
+      item.put("itemId", e.getKey().value());
+      item.put("quantity", e.getValue().value());
+      items.add(item);
     }
     payload.put("orderItems", items);
     return payload;

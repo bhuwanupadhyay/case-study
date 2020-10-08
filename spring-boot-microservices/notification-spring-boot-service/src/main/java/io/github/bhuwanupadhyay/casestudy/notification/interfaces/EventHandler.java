@@ -1,7 +1,8 @@
 package io.github.bhuwanupadhyay.casestudy.notification.interfaces;
 
 import io.github.bhuwanupadhyay.casestudy.notification.infrastructure.brokers.EventSource;
-import java.util.Map;
+import io.github.bhuwanupadhyay.casestudy.notifications.domain.commands.OrderItem;
+import java.util.List;
 import org.springframework.cloud.stream.annotation.StreamListener;
 
 public interface EventHandler {
@@ -16,11 +17,11 @@ public interface EventHandler {
   void on(OrderRefundedPayload payload);
 
   record OrderPlacedPayload(String orderId,
-                            Map<String, Integer> orderItems) {
+                            List<OrderItem> orderItems) {
   }
 
   record OrderShippedPayload(String orderId,
-                             Map<String, Integer> orderItems) {
+                             List<OrderItem> orderItems) {
   }
 
   record OrderRefundedPayload(String orderId,

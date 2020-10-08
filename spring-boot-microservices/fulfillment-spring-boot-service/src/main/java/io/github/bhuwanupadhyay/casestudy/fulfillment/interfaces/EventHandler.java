@@ -2,9 +2,11 @@ package io.github.bhuwanupadhyay.casestudy.fulfillment.interfaces;
 
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.CancelShippingCommand;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.ModifyOrderCommand;
+import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.OrderItem;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.PrepareShippingCommand;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands.ShipOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.infrastructure.brokers.EventSource;
+import java.util.List;
 import java.util.Map;
 import org.springframework.cloud.stream.annotation.StreamListener;
 
@@ -42,14 +44,14 @@ public interface EventHandler {
   }
 
   record OrderPlacedPayload(String orderId,
-                            Map<String, Integer> orderItems) {
+                            List<OrderItem> orderItems) {
     public PrepareShippingCommand toCommand() {
       return new PrepareShippingCommand(this.orderId, this.orderItems);
     }
   }
 
   record OrderModifiedPayload(String orderId,
-                              Map<String, Integer> orderItems) {
+                              List<OrderItem> orderItems) {
     public ModifyOrderCommand toCommand() {
       return new ModifyOrderCommand(this.orderId, this.orderItems);
     }

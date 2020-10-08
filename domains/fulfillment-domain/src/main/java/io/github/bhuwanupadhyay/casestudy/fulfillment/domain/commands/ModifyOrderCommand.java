@@ -1,7 +1,7 @@
 package io.github.bhuwanupadhyay.casestudy.fulfillment.domain.commands;
 
-import java.util.Map;
+import java.util.List;
 
 public record ModifyOrderCommand(String orderId,
-                                 Map<String, Integer> orderItems) {
+                                 List<OrderItem> orderItems) {
 }

@@ -1,7 +1,7 @@
 package io.github.bhuwanupadhyay.casestudy.billing.domain.commands;
 
-import java.util.Map;
+import java.util.List;
 
 public record ModifyChargeCommand(String billId,
-                                  Map<String, Integer> orderItems) {
+                                  List<OrderItem> orderItems) {
 }

@@ -2,7 +2,9 @@ package io.github.bhuwanupadhyay.casestudy.sales.interfaces;
 
 import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.CancelOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.ModifyOrderCommand;
+import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.OrderItem;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.PlaceOrderCommand;
+import java.util.List;
 import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +38,7 @@ public interface HttpHandler {
   );
 
   record OrderResource(String orderId,
-                       Map<String, Integer> orderItems) {
+                       List<OrderItem> orderItems) {
   }
 
   record CancelOrderRequest(String reason) {
@@ -45,13 +47,13 @@ public interface HttpHandler {
     }
   }
 
-  record ModifyOrderRequest(Map<String, Integer> orderItems) {
+  record ModifyOrderRequest(List<OrderItem> orderItems) {
     public ModifyOrderCommand toCommand(String orderId) {
       return new ModifyOrderCommand(orderId, orderItems);
     }
   }
 
-  record PlaceOrderRequest(Map<String, Integer> orderItems,
+  record PlaceOrderRequest(List<OrderItem> orderItems,
                            String customerId) {
     public PlaceOrderCommand toCommand() {
       return new PlaceOrderCommand(orderItems, customerId);

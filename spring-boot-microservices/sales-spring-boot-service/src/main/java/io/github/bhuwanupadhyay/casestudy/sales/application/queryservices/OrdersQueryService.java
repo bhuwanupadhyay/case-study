@@ -1,9 +1,10 @@
 package io.github.bhuwanupadhyay.casestudy.sales.application.queryservices;
 
+import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.OrderItem;
 import io.github.bhuwanupadhyay.casestudy.sales.jooq.tables.SaleOrderLines;
 import io.github.bhuwanupadhyay.casestudy.sales.jooq.tables.SaleOrders;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 import org.jooq.DSLContext;
 import org.jooq.Record3;
 import org.jooq.Result;
@@ -30,9 +31,9 @@ public class OrdersQueryService {
             .join(ORDERS).on(ORDERS.ORDER_ID.eq(ORDER_LINES.ORDER_ID))
             .where(ORDERS.ORDER_ID.eq(orderId))
             .fetch();
-    Map<String, Integer> orderItems = new HashMap<>();
+    List<OrderItem> orderItems = new ArrayList<>();
     for (Record3<String, String, Integer> record3 : result) {
-      orderItems.put(record3.value2(), record3.value3());
+      orderItems.add(new OrderItem(record3.value2(), record3.value3()));
     }
     return new OrderResource(orderId, orderItems);
   }

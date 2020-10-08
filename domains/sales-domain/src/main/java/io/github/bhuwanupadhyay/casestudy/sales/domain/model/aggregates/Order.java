@@ -2,6 +2,7 @@ package io.github.bhuwanupadhyay.casestudy.sales.domain.model.aggregates;
 
 import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.CancelOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.ModifyOrderCommand;
+import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.OrderItem;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.PlaceOrderCommand;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.model.events.OrderCancelled;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.model.events.OrderModified;
@@ -16,6 +17,7 @@ import io.github.bhuwanupadhyay.core.Problem;
 import io.github.bhuwanupadhyay.ddd.AggregateRoot;
 import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Order extends AggregateRoot<OrderId> {
@@ -31,9 +33,7 @@ public class Order extends AggregateRoot<OrderId> {
 
   public Order(OrderId orderId, PlaceOrderCommand command) {
     this(orderId);
-    for (Map.Entry<String, Integer> e : command.orderItems().entrySet()) {
-      orderLines.put(new ItemId(e.getKey()), new Quantity(e.getValue()));
-    }
+    this.addOrderItems(command.orderItems());
     this.customerId = new CustomerId(command.customerId());
     this.status = OrderStatus.PLACED;
     this.registerEvent(new OrderPlaced(this.getId(), this.orderLines));
@@ -41,10 +41,14 @@ public class Order extends AggregateRoot<OrderId> {
 
   public void on(ModifyOrderCommand command) {
     this.status = OrderStatus.MODIFIED;
-    for (Map.Entry<String, Integer> e : command.orderItems().entrySet()) {
-      orderLines.put(new ItemId(e.getKey()), new Quantity(e.getValue()));
-    }
+    this.addOrderItems(command.orderItems());
     this.registerEvent(new OrderModified(this.getId(), this.orderLines));
+  }
+
+  private void addOrderItems(List<OrderItem> orderItems) {
+    for (OrderItem e : orderItems) {
+      orderLines.put(new ItemId(e.itemId()), new Quantity(e.quantity()));
+    }
   }
 
   public void on(CancelOrderCommand command) {

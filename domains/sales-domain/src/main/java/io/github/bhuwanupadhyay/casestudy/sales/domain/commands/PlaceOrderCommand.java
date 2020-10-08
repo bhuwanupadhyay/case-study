@@ -1,7 +1,7 @@
 package io.github.bhuwanupadhyay.casestudy.sales.domain.commands;
 
-import java.util.Map;
+import java.util.List;
 
-public record PlaceOrderCommand(Map<String, Integer> orderItems,
+public record PlaceOrderCommand(List<OrderItem> orderItems,
                                 String customerId) {
 }
