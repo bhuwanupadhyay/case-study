@@ -6,12 +6,12 @@ The series also cover how to deploy microservices in both the cloud and on premi
 ## Series
 
 ### Part 1: Domain Modelling
-- [ ] [Event storming for the context maps]()
-- [ ] [DDD for domain modelling]()
+- [ ] [Event storming for the context maps](docs/event-storming-for-the-context-map.md)
+- [ ] [DDD for domain modelling](docs/ddd-for-domain-modeling.md)
 
 ### Part 2: Interfaces
-- [ ] [HTTP interfaces]()
-- [ ] [Event interfaces]()
+- [ ] [HTTP interfaces](docs/http-interfaces.md)
+- [ ] [Event interfaces](docs/event-interfaces.md)
 
 ### Part 3: Data Layer Design
 - [ ] [Using Hibernate + Spring Data]()
