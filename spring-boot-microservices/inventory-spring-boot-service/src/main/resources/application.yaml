@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: InventoryService
   profiles:
     active: dev
 mybatis:

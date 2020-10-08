@@ -4,6 +4,8 @@ import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.services.CancelShip
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.services.ModifyShippingCommandService;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.services.PrepareShippingCommandService;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.services.ShipOrderCommandService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,6 +15,7 @@ public class FulfillmentEventHandler implements EventHandler {
   private final ModifyShippingCommandService modifyShippingCommandService;
   private final ShipOrderCommandService shipOrderCommandService;
   private final CancelShippingCommandService cancelShippingCommandService;
+  private final static Logger LOG = LoggerFactory.getLogger(FulfillmentEventHandler.class);
 
   public FulfillmentEventHandler(
       PrepareShippingCommandService prepareShippingCommandService,
@@ -26,22 +29,27 @@ public class FulfillmentEventHandler implements EventHandler {
   }
 
   @Override public void on(OrderPlacedPayload payload) {
+    LOG.info("Received: {}", payload);
     this.prepareShippingCommandService.execute(payload.toCommand());
   }
 
   @Override public void on(OrderModifiedPayload payload) {
+    LOG.info("Received: {}", payload);
     this.modifyShippingCommandService.execute(payload.toCommand());
   }
 
   @Override public void on(OrderCancelledPayload payload) {
+    LOG.info("Received: {}", payload);
     this.cancelShippingCommandService.execute(payload.toCommand());
   }
 
   @Override public void on(OrderBilledPayload payload) {
+    LOG.info("Received: {}", payload);
     this.shipOrderCommandService.execute(payload.toCommand());
   }
 
   @Override public void on(ModifiedBilledPayload payload) {
+    LOG.info("Received: {}", payload);
     this.shipOrderCommandService.execute(payload.toCommand());
   }
 }

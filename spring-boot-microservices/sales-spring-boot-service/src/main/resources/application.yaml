@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: SalesService
   profiles:
     active: dev
   cloud:
