@@ -17,14 +17,9 @@ import static io.github.bhuwanupadhyay.casestudy.sales.jooq.Tables.SALE_ORDERS;
 import static io.github.bhuwanupadhyay.casestudy.sales.jooq.Tables.SALE_ORDER_LINES;
 
 @Service
-public class OrdersQueryService {
+public record OrdersQueryService(DSLContext context) {
   private static final SaleOrders ORDERS = SALE_ORDERS;
   private static final SaleOrderLines ORDER_LINES = SALE_ORDER_LINES;
-  private final DSLContext context;
-
-  public OrdersQueryService(DSLContext context) {
-    this.context = context;
-  }
 
   public OrderResource findByOrderId(String orderId) {
     Result<Record3<String, String, Integer>> orderById =

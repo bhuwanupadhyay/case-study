@@ -13,21 +13,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.springframework.context.event.EventListener;
+
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DomainEventPublisherService implements DomainEventPublisher {
+public record DomainEventPublisherService(EventSource eventSource) implements DomainEventPublisher {
 
-  private final EventSource eventSource;
-
-  public DomainEventPublisherService(EventSource eventSource) {
-    this.eventSource = eventSource;
-  }
-
-  @EventListener
   public void publish(DomainEvent domainEvent) {
     Map<String, Object> h = new HashMap<>();
     h.put("X-Service", "Sales");

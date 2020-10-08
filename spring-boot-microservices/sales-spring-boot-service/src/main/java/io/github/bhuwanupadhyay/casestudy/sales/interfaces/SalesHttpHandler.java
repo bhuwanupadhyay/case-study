@@ -10,23 +10,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class SalesHttpHandler implements HttpHandler {
-
-  private final PlaceOrderCommandService placeOrderCommandService;
-  private final ModifyOrderCommandService modifyOrderCommandService;
-  private final CancelOrderCommandService cancelOrderCommandService;
-  private final OrdersQueryService ordersQueryService;
-
-  public SalesHttpHandler(
-      PlaceOrderCommandService placeOrderCommandService,
-      ModifyOrderCommandService modifyOrderCommandService,
-      CancelOrderCommandService cancelOrderCommandService,
-      OrdersQueryService ordersQueryService) {
-    this.placeOrderCommandService = placeOrderCommandService;
-    this.modifyOrderCommandService = modifyOrderCommandService;
-    this.cancelOrderCommandService = cancelOrderCommandService;
-    this.ordersQueryService = ordersQueryService;
-  }
+public record SalesHttpHandler(
+    PlaceOrderCommandService placeOrderCommandService,
+    ModifyOrderCommandService modifyOrderCommandService,
+    CancelOrderCommandService cancelOrderCommandService,
+    OrdersQueryService ordersQueryService) implements HttpHandler {
 
   @Override public ResponseEntity<Void> placeOrder(PlaceOrderRequest request) {
     placeOrderCommandService.execute(request.toCommand());

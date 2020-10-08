@@ -12,7 +12,7 @@ import io.github.bhuwanupadhyay.ddd.DomainEvent;
 import io.github.bhuwanupadhyay.ddd.DomainEventPublisher;
 import java.util.HashMap;
 import java.util.Map;
-import org.springframework.context.event.EventListener;
+
 import org.springframework.messaging.MessageHeaders;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,6 @@ public class DomainEventPublisherService implements DomainEventPublisher {
     this.eventSource = eventSource;
   }
 
-  @EventListener
   public void publish(DomainEvent domainEvent) {
     Map<String, Object> h = new HashMap<>();
     h.put("X-Service", "Billing");
