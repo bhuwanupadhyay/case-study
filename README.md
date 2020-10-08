@@ -6,18 +6,18 @@ The series also cover how to deploy microservices in both the cloud and on premi
 ## Series
 
 ### Part 1: Domain Modelling
-- [ ] [1: Event storming for the context maps]()
-- [ ] [2: DDD for domain modelling]()
+- [ ] [I: Event storming for the context maps]()
+- [ ] [II: DDD for domain modelling]()
 
 ### Part 2: Interfaces
-- [ ] [1: HTTP interfaces with Spring Web]()
-- [ ] [2: Event interfaces with Spring Cloud Stream]()
+- [ ] [I: HTTP interfaces with Spring Web]()
+- [ ] [II: Event interfaces with Spring Cloud Stream]()
 
 ### Part 3: Reading data from database
-- [ ] [1: Using Hibernate + Spring Data for Query]()
-- [ ] [2: Using jooQ for Query Service]()
-- [ ] [3: Using MyBatis for Query Service]()
+- [ ] [I: Using Hibernate + Spring Data for Query]()
+- [ ] [II: Using jooQ for Query Service]()
+- [ ] [III: Using MyBatis for Query Service]()
 
 ### Part 4: Database Migration
-- [ ] [1: Using Liquibase for database migration]()
-- [ ] [2: Using Flyway for database migration]()
+- [ ] [I: Using Liquibase for database migration]()
+- [ ] [II: Using Flyway for database migration]()
