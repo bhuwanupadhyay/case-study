@@ -1,9 +1,13 @@
 package io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects;
 
-import java.util.Map;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
-public record Rates(Map<ItemId, Price> value) {
-  public Price getByItemId(ItemId itemId) {
-    return this.value.get(itemId);
+public record Rates(List<ItemInfo> value) {
+  public Optional<Price> getByItemId(ItemId itemId) {
+    return this.value.stream().filter(e -> Objects.equals(e.itemId(), itemId))
+        .findFirst()
+        .map(ItemInfo::price);
   }
 }

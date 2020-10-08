@@ -6,5 +6,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface ShippingEntityRepository extends CrudRepository<ShippingEntity, Long> {
 
   Optional<ShippingEntity> findByOrderId(String orderId);
+
   Optional<ShippingEntity> findByShippingId(String shippingId);
 }

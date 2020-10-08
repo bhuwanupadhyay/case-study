@@ -4,7 +4,8 @@
     "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
   <typeAliases>
-    <package name="io.github.bhuwanupadhyay.casestudy.inventory.infrastructure.repositories.mybatis.dto"/>
+    <package
+        name="io.github.bhuwanupadhyay.casestudy.inventory.infrastructure.repositories.mybatis.dto"/>
   </typeAliases>
   <mappers>
     <mapper resource="db/mybatis/ItemMapper.xml"/>

@@ -15,7 +15,9 @@ import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Pric
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Quantity;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Rates;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.RefundReason;
+import io.github.bhuwanupadhyay.core.BadRequestException;
 import io.github.bhuwanupadhyay.core.Problem;
+import io.github.bhuwanupadhyay.core.SimpleProblem;
 import io.github.bhuwanupadhyay.ddd.AggregateRoot;
 import java.math.BigDecimal;
 import java.util.Map;
@@ -44,7 +46,9 @@ public class Billing extends AggregateRoot<BillingId> {
     BigDecimal amount = BigDecimal.ZERO;
     for (Map.Entry<String, Integer> e : orderItems.entrySet()) {
       ItemId key = new ItemId(e.getKey());
-      Price price = rates.getByItemId(key);
+      Price price = rates.getByItemId(key)
+          .orElseThrow(() -> new BadRequestException(
+              new SimpleProblem("orderItems." + key, "price.not.found")));
       Quantity quantity = new Quantity(e.getValue());
       BigDecimal totalQuantityAmount = price.value().multiply(new BigDecimal(quantity.value()));
       amount = amount.add(totalQuantityAmount);

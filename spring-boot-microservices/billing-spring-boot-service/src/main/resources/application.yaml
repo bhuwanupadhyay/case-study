@@ -20,3 +20,8 @@ spring:
         orderRefunded: # [MessageChannel]
           destination: order.refunded
 
+###########################
+#   APP PROPERTIES        #
+###########################
+InventoryService:
+  url: http://localhost:8080

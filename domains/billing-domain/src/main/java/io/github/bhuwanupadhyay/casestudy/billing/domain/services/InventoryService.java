@@ -1,12 +1,10 @@
 package io.github.bhuwanupadhyay.casestudy.billing.domain.services;
 
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.ItemId;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Price;
-
-import java.util.Map;
-import java.util.Set;
+import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.ItemInfo;
+import java.util.concurrent.CompletableFuture;
 
 public interface InventoryService {
 
-    Map<ItemId, Price> getItemRates(Set<ItemId> itemIds);
+  CompletableFuture<ItemInfo> getItemPrice(ItemId itemId);
 }
