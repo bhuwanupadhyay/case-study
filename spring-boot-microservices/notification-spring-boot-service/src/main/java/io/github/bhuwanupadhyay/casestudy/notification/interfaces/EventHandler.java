@@ -25,7 +25,7 @@ public interface EventHandler {
                              String shippingAddress) {
   }
 
-  record OrderRefundedPayload(String orderId,
-                              String cancellationReason) {
+  record OrderRefundedPayload(String billingId,
+                              String refundReason) {
   }
 }

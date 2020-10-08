@@ -36,7 +36,7 @@ public record DomainEventPublisherService(EventSource eventSource) implements Do
     } else if (domainEvent instanceof OrderCancelled orderCancelled) {
       Map<String, Object> payload = toPayload(orderCancelled.orderId());
       payload.put("cancellationReason", orderCancelled.cancellationReason().value());
-      eventSource.orderCancelled().send(MessageBuilder.createMessage(domainEvent, headers));
+      eventSource.orderCancelled().send(MessageBuilder.createMessage(payload, headers));
     }
   }
 
