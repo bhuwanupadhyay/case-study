@@ -5,7 +5,6 @@ import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.ModifyOrderComma
 import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.OrderItem;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.commands.PlaceOrderCommand;
 import java.util.List;
-import java.util.Map;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -16,21 +15,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 public interface HttpHandler {
 
   @PostMapping("/sales")
-  ResponseEntity<String> placeOrder(
+  ResponseEntity<Void> placeOrder(
       @RequestBody PlaceOrderRequest request
   );
 
   @PatchMapping("/sales/{orderId}")
-  ResponseEntity<String> modifyOrder(
+  ResponseEntity<Void> modifyOrder(
       @PathVariable("orderId") String orderId,
       @RequestBody ModifyOrderRequest request
   );
 
   @PatchMapping("/sales/{orderId}/cancel")
-  ResponseEntity<String> cancelOrder(
+  ResponseEntity<Void> cancelOrder(
       @PathVariable("orderId") String orderId,
       @RequestBody CancelOrderRequest request
   );
+
+  @GetMapping("/sales")
+  ResponseEntity<List<OrderResource>> getOrders();
 
   @GetMapping("/sales/{orderId}")
   ResponseEntity<OrderResource> getOrder(

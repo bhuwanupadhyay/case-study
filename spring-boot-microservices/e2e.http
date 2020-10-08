@@ -12,3 +12,7 @@ Content-Type: application/json
   ],
   "customerId": "1"
 }
+
+
+### GET Orders
+GET http://localhost:8080/sales

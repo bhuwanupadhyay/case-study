@@ -4,6 +4,7 @@ import io.github.bhuwanupadhyay.casestudy.sales.application.queryservices.Orders
 import io.github.bhuwanupadhyay.casestudy.sales.domain.services.CancelOrderCommandService;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.services.ModifyOrderCommandService;
 import io.github.bhuwanupadhyay.casestudy.sales.domain.services.PlaceOrderCommandService;
+import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,19 +28,23 @@ public class SalesHttpHandler implements HttpHandler {
     this.ordersQueryService = ordersQueryService;
   }
 
-  @Override public ResponseEntity<String> placeOrder(PlaceOrderRequest request) {
+  @Override public ResponseEntity<Void> placeOrder(PlaceOrderRequest request) {
     placeOrderCommandService.execute(request.toCommand());
     return ResponseEntity.status(HttpStatus.CREATED).build();
   }
 
-  @Override public ResponseEntity<String> modifyOrder(String orderId, ModifyOrderRequest request) {
+  @Override public ResponseEntity<Void> modifyOrder(String orderId, ModifyOrderRequest request) {
     modifyOrderCommandService.execute(request.toCommand(orderId));
     return ResponseEntity.ok().build();
   }
 
-  @Override public ResponseEntity<String> cancelOrder(String orderId, CancelOrderRequest request) {
+  @Override public ResponseEntity<Void> cancelOrder(String orderId, CancelOrderRequest request) {
     cancelOrderCommandService.execute(request.toCommand(orderId));
     return ResponseEntity.ok().build();
+  }
+
+  @Override public ResponseEntity<List<OrderResource>> getOrders() {
+    return ResponseEntity.ok(ordersQueryService.findAll());
   }
 
   @Override public ResponseEntity<OrderResource> getOrder(String orderId) {
