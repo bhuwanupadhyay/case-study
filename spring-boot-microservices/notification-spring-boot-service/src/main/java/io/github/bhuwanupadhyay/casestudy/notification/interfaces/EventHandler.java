@@ -20,8 +20,9 @@ public interface EventHandler {
                             List<OrderItem> orderItems) {
   }
 
-  record OrderShippedPayload(String orderId,
-                             List<OrderItem> orderItems) {
+  record OrderShippedPayload(String shippingId,
+                             String orderId,
+                             String shippingAddress) {
   }
 
   record OrderRefundedPayload(String orderId,
