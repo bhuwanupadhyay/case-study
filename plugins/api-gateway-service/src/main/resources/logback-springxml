@@ -71,7 +71,13 @@
     </filter>
   </appender>
 
-  <!--It will send your logs to logstash-->
+  <!--It will send your logs to logstash
+    application.yaml
+   
+    logstash:
+      host: localhost
+      port: 5044
+  -->
   <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
     <param name="Encoding" value="UTF-8"/>
     <remoteHost>${logstashHost}</remoteHost>

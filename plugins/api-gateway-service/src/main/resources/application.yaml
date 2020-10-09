@@ -11,8 +11,7 @@ management:
     web:
       exposure:
         include: prometheus,health,info
-
-logstash:
-  host: localhost
-  port: 5044
-debug: true
+boot:
+  logstash:
+    enabled: true
+    url: localhost:5044
