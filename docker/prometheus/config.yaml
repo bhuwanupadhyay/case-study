@@ -1,4 +1,3 @@
-# Sample global 02-beats-input.conf for monitoring
 global:
   scrape_interval: 15s # By default, scrape targets every 15 seconds.
 
@@ -10,7 +9,6 @@ global:
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this 02-beats-input.conf.
   - job_name: 'Microservices'
     scrape_interval: 5s
     metrics_path: /actuator/prometheus
