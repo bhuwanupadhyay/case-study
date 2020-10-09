@@ -6,6 +6,7 @@ import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.aggregates.Sh
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.repositories.Shippings;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.OrderId;
 import io.github.bhuwanupadhyay.core.CommandService;
+import java.util.Optional;
 
 public class ModifyShippingCommandService implements CommandService<ModifyOrderCommand> {
 
@@ -19,8 +20,10 @@ public class ModifyShippingCommandService implements CommandService<ModifyOrderC
   }
 
   @Override public void execute(ModifyOrderCommand command) {
-    Shipping shipping = shippings.findByOrderId(new OrderId(command.orderId()));
-    if (shipping.isNotShipped()) {
+    Optional<Shipping> byOrderId =
+        shippings.findByOrderIdAndStatusNotShipped(new OrderId(command.orderId()));
+    if (byOrderId.isPresent()) {
+      Shipping shipping = byOrderId.get();
       shipping.on(command);
       shippings.save(shipping);
     } else {

@@ -26,10 +26,9 @@ public class ShippingsRepository extends Shippings {
     this.repository = repository;
   }
 
-  @Override public Shipping findByOrderId(OrderId orderId) {
-    return repository.findByOrderId(orderId.value())
-        .map(this::toShipping)
-        .orElseThrow(() -> new DomainEntityNotFound("[By OrderId]", orderId));
+  @Override public Optional<Shipping> findByOrderIdAndStatusNotShipped(OrderId orderId) {
+    return repository.findByOrderIdAndStatusNot(orderId.value(), ShippingStatus.SHIPPED.name())
+        .map(this::toShipping);
   }
 
   @Override public Optional<Shipping> findOne(ShippingId shippingId) {
