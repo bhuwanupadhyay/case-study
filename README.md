@@ -6,8 +6,8 @@ The series also cover how to deploy microservices in both the cloud and on premi
 ## Series [WORK IN PROGRESS]
 
 ### Part 1: Domain Modelling
-- [ ] [Event storming for the context maps](docs/event-storming-for-the-context-map.md)
-- [ ] [DDD for domain modelling](docs/ddd-for-domain-modeling.md)
+- [ ] [Event Storming Workshop](docs/event-storming-workshop.md)
+- [ ] [DDD Domain Modelling](docs/ddd-domain-modeling.md)
 
 ### Part 2: Interface Design
 - [ ] [HTTP Interfaces](docs/http-interfaces.md)
