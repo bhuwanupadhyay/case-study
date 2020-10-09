@@ -12,7 +12,7 @@
   <modules>
     <module>plugins</module>
     <module>domains</module>
-    <module>spring-boot-microservices</module>
+    <module>microservices</module>
   </modules>
 
   <properties>

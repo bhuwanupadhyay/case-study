@@ -21,3 +21,9 @@ The series also cover how to deploy microservices in both the cloud and on premi
 ### Part 4: Database Migration
 - [ ] [Using Liquibase]()
 - [ ] [Using Flyway]()
+
+### Part 5: Distributed Tracing
+- [ ] [Using Zipkin]
+
+### Part 5: Edge Server
+- [ ] [API Gateway with Spring Cloud Gateway]
