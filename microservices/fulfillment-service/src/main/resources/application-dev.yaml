@@ -10,4 +10,4 @@ spring:
     host: localhost
     port: 5672
 server:
-  port: 8083
+  port: 8082

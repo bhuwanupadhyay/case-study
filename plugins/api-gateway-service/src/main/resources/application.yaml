@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: ApiGatewayService
+  profiles:
+    active: dev
+  zipkin:
+    sender:
+      type: web
