@@ -1,2 +1,14 @@
 server:
   port: 8080
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: SalesService
+          uri: http://localhost:8085
+          predicates:
+            - Path=/sales/**
+        - id: InventoryService
+          uri: http://localhost:8083
+          predicates:
+            - Path=/items/**

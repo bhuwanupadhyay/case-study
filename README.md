@@ -27,3 +27,5 @@ The series also cover how to deploy microservices in both the cloud and on premi
 
 ### Part 5: Edge Server
 - [ ] [API Gateway with Spring Cloud Gateway]()
+- [ ] [Service Hiding & Runtime Discovery]()
+- [ ] [Securing Services with Spring Cloud Gateway]()
