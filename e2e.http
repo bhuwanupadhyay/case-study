@@ -19,9 +19,6 @@ GET http://localhost:8080/sales
 client.global.set("orderId", response.body[0].orderId);
 %}
 
-### GET Order by ID
-GET http://localhost:8080/sales/{{orderId}}
-
 ### OrderModified
 POST http://localhost:8080/sales/{{orderId}}
 Content-Type: application/json
@@ -42,3 +39,6 @@ Content-Type: application/json
 {
   "reason": "Mistakenly order has been placed."
 }
+
+### GET Order by ID
+GET http://localhost:8080/sales/{{orderId}}
