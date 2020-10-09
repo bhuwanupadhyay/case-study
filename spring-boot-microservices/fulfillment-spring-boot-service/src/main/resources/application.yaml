@@ -23,4 +23,6 @@ spring:
           group: fulfillment
         orderShipped: # [MessageChannel]
           destination: order.shipped
-
+  zipkin:
+    sender:
+      type: rabbit

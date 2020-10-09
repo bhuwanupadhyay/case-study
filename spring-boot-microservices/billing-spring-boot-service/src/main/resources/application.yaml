@@ -21,6 +21,9 @@ spring:
           destination: modification.billed
         orderRefunded: # [MessageChannel]
           destination: order.refunded
+  zipkin:
+    sender:
+      type: rabbit
 
 ###########################
 #   APP PROPERTIES        #

@@ -15,4 +15,7 @@ spring:
         orderRefunded: # [SubscribableChannel]
           destination: order.refunded
           group: notification
+  zipkin:
+    sender:
+      type: rabbit
 

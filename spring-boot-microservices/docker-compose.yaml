@@ -21,3 +21,13 @@ services:
     ports:
       - 5672:5672
       - 15672:15672
+  zipkin:
+    image: openzipkin/zipkin-slim
+    ports:
+      - 9411:9411
+    links:
+      - rabbitmq
+    environment:
+      - RABBIT_ADDRESSES=rabbitmq:5672
+      - RABBIT_USER=user
+      - RABBIT_PASSWORD=bitnami
