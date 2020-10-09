@@ -23,6 +23,7 @@ public class SpringLogstashLogbackAutoConfiguration {
   private String url = "localhost:5044";
   private String trustStoreLocation;
   private String trustStorePassword;
+  private boolean enabled;
 
   @Bean
   @ConditionalOnProperty("boot.logstash.enabled")
@@ -75,5 +76,13 @@ public class SpringLogstashLogbackAutoConfiguration {
 
   public void setTrustStorePassword(String trustStorePassword) {
     this.trustStorePassword = trustStorePassword;
+  }
+
+  public void setEnabled(boolean enabled) {
+    this.enabled = enabled;
+  }
+
+  public String getName() {
+    return name;
   }
 }
