@@ -23,8 +23,7 @@ spring:
           destination: order.refunded
   zipkin:
     sender:
-      type: rabbit
-
+      type: web
 ###########################
 #   APP PROPERTIES        #
 ###########################

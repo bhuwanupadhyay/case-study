@@ -17,5 +17,5 @@ spring:
           group: notification
   zipkin:
     sender:
-      type: rabbit
+      type: web
 

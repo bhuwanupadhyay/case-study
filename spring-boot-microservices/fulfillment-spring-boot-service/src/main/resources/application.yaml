@@ -25,4 +25,4 @@ spring:
           destination: order.shipped
   zipkin:
     sender:
-      type: rabbit
+      type: web

@@ -5,6 +5,6 @@ spring:
     active: dev
   zipkin:
     sender:
-      type: rabbit
+      type: web
 mybatis:
   config-location: classpath:mybatis-config.xml

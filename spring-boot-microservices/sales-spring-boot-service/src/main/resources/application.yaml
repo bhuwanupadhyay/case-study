@@ -14,4 +14,4 @@ spring:
           destination: order.cancelled
   zipkin:
     sender:
-      type: rabbit
+      type: web
