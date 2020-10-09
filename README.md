@@ -23,7 +23,7 @@ The series also cover how to deploy microservices in both the cloud and on premi
 - [ ] [Using Flyway]()
 
 ### Part 5: Distributed Tracing
-- [ ] [Using Zipkin]
+- [ ] [Using Zipkin]()
 
 ### Part 5: Edge Server
-- [ ] [API Gateway with Spring Cloud Gateway]
+- [ ] [API Gateway with Spring Cloud Gateway]()
