@@ -72,13 +72,13 @@
   </appender>
 
   <!--It will send your logs to logstash-->
-  <appender name="logstash" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+  <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
     <param name="Encoding" value="UTF-8"/>
     <remoteHost>${logstashHost}</remoteHost>
     <port>${logstashPort}</port>
     <!-- encoder is required -->
     <encoder class="net.logstash.logback.encoder.LogstashEncoder">
-      <customFields>{"applicationName":"${applicationName}","env":"${env}"}</customFields>
+      <customFields>{"applicationName":"${applicationName}"}</customFields>
     </encoder>
   </appender>
 
@@ -87,7 +87,7 @@
     <appender-ref ref="FILE_INFO"/>
     <appender-ref ref="FILE_WARN"/>
     <appender-ref ref="FILE_ERROR"/>
-    <appender-ref ref="logstash"/>
+    <appender-ref ref="LOGSTASH"/>
   </root>
 
 </configuration>

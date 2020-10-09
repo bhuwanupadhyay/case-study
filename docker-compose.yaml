@@ -56,11 +56,27 @@ services:
       - 13000:3000
     links:
       - prometheus
-  elk:
-    image: sebp/elk
-    volumes:
-      - ./docker/logstash/beats.conf:/etc/logstash/conf.d/02-beats-input.conf
+  elasticsearch:
+    image: elasticsearch:7.9.2
+    environment:
+      - discovery.type=single-node
     ports:
-      - 5601:5601 #Kibana
-      - 9200:9200 #Elasticsearch
-      - 5044:5044 #Logstash
+    - 9200
+  logstash:
+    image: logstash:7.9.2
+    volumes:
+      - ./docker/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    ports:
+      - 5000:5000
+    links:
+      - elasticsearch
+  kibana:
+    image: kibana:7.9.2
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    links:
+      - elasticsearch

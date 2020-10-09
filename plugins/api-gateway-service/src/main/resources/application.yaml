@@ -15,3 +15,4 @@ management:
 logstash:
   host: localhost
   port: 5044
+debug: true
