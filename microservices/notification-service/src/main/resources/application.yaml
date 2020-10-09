@@ -18,4 +18,8 @@ spring:
   zipkin:
     sender:
       type: web
-
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health,info

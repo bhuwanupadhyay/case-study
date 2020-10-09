@@ -1,3 +1,8 @@
+#   APP PROPERTIES
+#------------------------------------------
+InventoryService:
+  url: http://localhost:8080
+#------------------------------------------
 spring:
   application:
     name: BillingService
@@ -24,8 +29,8 @@ spring:
   zipkin:
     sender:
       type: web
-###########################
-#   APP PROPERTIES        #
-###########################
-InventoryService:
-  url: http://localhost:8080
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health,info

@@ -1,3 +1,8 @@
+#   APP PROPERTIES
+#------------------------------------------
+InventoryService:
+  url: http://localhost:8083
+#------------------------------------------
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
@@ -11,9 +16,3 @@ spring:
     port: 5672
 server:
   port: 8081
-
-###########################
-#   APP PROPERTIES        #
-###########################
-InventoryService:
-  url: http://localhost:8083

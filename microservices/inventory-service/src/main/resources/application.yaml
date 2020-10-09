@@ -1,3 +1,5 @@
+mybatis:
+  config-location: classpath:mybatis-config.xml
 spring:
   application:
     name: InventoryService
@@ -6,5 +8,8 @@ spring:
   zipkin:
     sender:
       type: web
-mybatis:
-  config-location: classpath:mybatis-config.xml
+management:
+  endpoints:
+    web:
+      exposure:
+        include: prometheus,health,info
