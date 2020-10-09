@@ -13,11 +13,11 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>sales-spring-boot-service</module>
-    <module>inventory-spring-boot-service</module>
-    <module>billing-spring-boot-service</module>
-    <module>fulfillment-spring-boot-service</module>
-    <module>notification-spring-boot-service</module>
+    <module>sales-service</module>
+    <module>inventory-service</module>
+    <module>billing-service</module>
+    <module>fulfillment-service</module>
+    <module>notification-service</module>
   </modules>
 
   <properties>
