@@ -13,6 +13,7 @@
     <module>plugins</module>
     <module>domains</module>
     <module>microservices</module>
+    <module>code-quality</module>
   </modules>
 
   <properties>
