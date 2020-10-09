@@ -1,4 +1,4 @@
-site_name: Microservice Architecture
+site_name: Building Microservices
 nav:
   - Home: index.md
   - About: about.md
