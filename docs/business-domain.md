@@ -2,7 +2,7 @@
 
 Our example architecture has four services that interact via events.
 
-![](business-events.png)
+![](../domains/business-events.png)
 
 The **Sales and Inventory** service emits three events:
 
