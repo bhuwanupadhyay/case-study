@@ -18,8 +18,14 @@ spring:
   zipkin:
     sender:
       type: web
+  main:
+    register-shutdown-hook: true
 management:
   endpoints:
     web:
       exposure:
         include: prometheus,health,info
+server:
+  shutdown: graceful
+logging:
+  register-shutdown-hook: true
