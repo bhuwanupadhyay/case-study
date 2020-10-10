@@ -1,6 +1,6 @@
 spring:
   application:
-    name: SalesService
+    name: sales-service
   profiles:
     active: dev
   cloud:

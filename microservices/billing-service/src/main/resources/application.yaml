@@ -1,11 +1,11 @@
 #   APP PROPERTIES
 #------------------------------------------
-InventoryService:
+inventory-service:
   url: http://localhost:8080
 #------------------------------------------
 spring:
   application:
-    name: BillingService
+    name: billing-service
   profiles:
     active: dev
   cloud:

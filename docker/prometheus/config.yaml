@@ -15,19 +15,19 @@ scrape_configs:
     static_configs:
       - targets: [ 'appdockerhost:8081' ]
         labels:
-          application: 'BillingService'
+          application: 'billing-service'
       - targets: [ 'appdockerhost:8082' ]
         labels:
-          application: 'FulfillmentService'
+          application: 'fullfilment-service'
       - targets: [ 'appdockerhost:8083' ]
         labels:
-          application: 'InventoryService'
+          application: 'inventory-service'
       - targets: [ 'appdockerhost:8084' ]
         labels:
-          application: 'NotificationService'
+          application: 'notification-service'
       - targets: [ 'appdockerhost:8085' ]
         labels:
-          application: 'SalesService'
+          application: 'sales-service'
   - job_name: 'Plugins'
     scrape_interval: 5s
     metrics_path: /actuator/prometheus

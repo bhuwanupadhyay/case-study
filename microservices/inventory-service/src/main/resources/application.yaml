@@ -2,7 +2,7 @@ mybatis:
   config-location: classpath:mybatis-config.xml
 spring:
   application:
-    name: InventoryService
+    name: inventory-service
   profiles:
     active: dev
   zipkin:
