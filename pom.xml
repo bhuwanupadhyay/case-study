@@ -62,13 +62,9 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.8.1</version>
         <configuration>
-          <failOnWarning>true</failOnWarning>
           <release>${java.version}</release>
-          <showDeprecation>true</showDeprecation>
-          <showWarnings>true</showWarnings>
           <source>${java.version}</source>
           <target>${java.version}</target>
-          <verbose>true</verbose>
           <compilerArgs>--enable-preview</compilerArgs>
         </configuration>
       </plugin>
