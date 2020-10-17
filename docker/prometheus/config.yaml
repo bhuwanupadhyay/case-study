@@ -1,4 +1,3 @@
-# Sample global config for monitoring
 global:
   scrape_interval: 15s # By default, scrape targets every 15 seconds.
 
@@ -10,33 +9,32 @@ global:
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'Microservices'
     scrape_interval: 5s
     metrics_path: /actuator/prometheus
     static_configs:
       - targets: [ 'appdockerhost:8081' ]
         labels:
-          application: 'BillingService'
+          application: 'billing-service'
       - targets: [ 'appdockerhost:8082' ]
         labels:
-          application: 'FulfillmentService'
+          application: 'fulfillment-service'
       - targets: [ 'appdockerhost:8083' ]
         labels:
-          application: 'InventoryService'
+          application: 'inventory-service'
       - targets: [ 'appdockerhost:8084' ]
         labels:
-          application: 'NotificationService'
+          application: 'notification-service'
       - targets: [ 'appdockerhost:8085' ]
         labels:
-          application: 'SalesService'
+          application: 'sales-service'
   - job_name: 'Plugins'
     scrape_interval: 5s
     metrics_path: /actuator/prometheus
     static_configs:
       - targets: [ 'appdockerhost:8080' ]
         labels:
-          application: 'ApiGatewayService'
+          application: 'api-gateway-service'
   - job_name: 'Supports'
     scrape_interval: 5s
     static_configs:

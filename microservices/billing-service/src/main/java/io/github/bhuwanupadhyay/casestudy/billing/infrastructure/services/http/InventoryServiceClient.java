@@ -5,7 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "InventoryService", url = "${InventoryService.url}")
+@FeignClient(name = "InventoryService", url = "${inventory-service.url}")
 public interface InventoryServiceClient {
 
   @GetMapping("/items/{itemId}")

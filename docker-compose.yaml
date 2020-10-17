@@ -31,28 +31,50 @@ services:
       - RABBIT_ADDRESSES=rabbitmq:5672
       - RABBIT_USER=user
       - RABBIT_PASSWORD=bitnami
-  prometheus:
-    image: prom/prometheus
-    volumes:
-      - ./docker/prometheus/:/etc/prometheus/
-    command: '--config.file=/etc/prometheus/config.yaml'
-    ports:
-      - 9090:9090
-    #-------------------------
-    # DOCKER HOST IP COMMAND
-    # run <ifconfig>, then look for 'docker0' of <inet address>
-    #-------------------------
-    extra_hosts:
-      - "appdockerhost:172.17.0.1"
-  grafana:
-    image: grafana/grafana
-    volumes:
-      - ./grafana/provisioning/:/etc/grafana/provisioning/
+  #  prometheus:
+  #    image: prom/prometheus
+  #    volumes:
+  #      - ./docker/prometheus/:/etc/prometheus/
+  #    command: '--beats.conf.file=/etc/prometheus/beats.conf.yaml'
+  #    ports:
+  #      - 9090:9090
+  #    #-------------------------
+  #    # DOCKER HOST IP COMMAND
+  #    # run <ifconfig>, then look for 'docker0' of <inet address>
+  #    #-------------------------
+  #    extra_hosts:
+  #      - "appdockerhost:172.17.0.1"
+  #  grafana:
+  #    image: grafana/grafana
+  #    volumes:
+  #      - ./docker/grafana/provisioning/:/etc/grafana/provisioning/
+  #    environment:
+  #      - GF_SECURITY_ADMIN_PASSWORD=admin
+  #      - GF_USERS_ALLOW_SIGN_UP=false
+  #      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+  #    ports:
+  #      - 13000:3000
+  #    links:
+  #      - prometheus
+  elasticsearch:
+    image: elasticsearch:7.9.2
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD=admin
-      - GF_USERS_ALLOW_SIGN_UP=false
-      - GF_INSTALL_PLUGINS=grafana-piechart-panel
+      - discovery.type=single-node
     ports:
-      - 13000:3000
+      - 9200:9200
+  logstash:
+    image: logstash:7.9.2
+    volumes:
+      - ./docker/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - 5044:5044
     links:
-      - prometheus
+      - elasticsearch
+  kibana:
+    image: kibana:7.9.2
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    ports:
+      - 5601:5601
+    links:
+      - elasticsearch

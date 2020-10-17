@@ -1,6 +1,6 @@
 #   APP PROPERTIES
 #------------------------------------------
-InventoryService:
+inventory-service:
   url: http://localhost:8083
 #------------------------------------------
 spring:

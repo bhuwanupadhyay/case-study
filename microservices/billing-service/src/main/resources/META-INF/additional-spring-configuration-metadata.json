@@ -1,9 +1,9 @@
 {
   "properties": [
     {
-      "name": "InventoryService.url",
+      "name": "inventory-service.url",
       "type": "java.lang.String",
-      "description": "Description for InventoryService.url."
+      "description": "Description for inventory-service.url."
     }
   ]
 }
