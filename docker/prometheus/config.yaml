@@ -18,7 +18,7 @@ scrape_configs:
           application: 'billing-service'
       - targets: [ 'appdockerhost:8082' ]
         labels:
-          application: 'fullfilment-service'
+          application: 'fulfillment-service'
       - targets: [ 'appdockerhost:8083' ]
         labels:
           application: 'inventory-service'
@@ -34,7 +34,7 @@ scrape_configs:
     static_configs:
       - targets: [ 'appdockerhost:8080' ]
         labels:
-          application: 'ApiGatewayService'
+          application: 'api-gateway-service'
   - job_name: 'Supports'
     scrape_interval: 5s
     static_configs:

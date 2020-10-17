@@ -1,6 +1,6 @@
 spring:
   application:
-    name: fullfilment-service
+    name: fulfillment-service
   profiles:
     active: dev
   cloud:
