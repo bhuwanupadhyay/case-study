@@ -8,9 +8,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CommandServiceConfiguration {
 
-  @Bean
-  public OrderPlacedNotificationCommandService orderPlacedNotificationCommand(
-      Notifications notifications) {
-    return new OrderPlacedNotificationCommandService(notifications);
-  }
+	@Bean
+	public OrderPlacedNotificationCommandService orderPlacedNotificationCommand(Notifications notifications) {
+		return new OrderPlacedNotificationCommandService(notifications);
+	}
+
 }

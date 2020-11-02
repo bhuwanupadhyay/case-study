@@ -17,7 +17,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 public class FulfillmentApplication {
 
-  public static void main(String[] args) {
-    SpringApplication.run(FulfillmentApplication.class, args);
-  }
+	public static void main(String[] args) {
+		SpringApplication.run(FulfillmentApplication.class, args);
+	}
+
 }

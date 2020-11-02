@@ -4,7 +4,6 @@ import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Bill
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.RefundReason;
 import io.github.bhuwanupadhyay.ddd.DomainEvent;
 
-public record OrderRefunded(BillingId billingId,
-                            RefundReason refundReason) implements DomainEvent {
+public record OrderRefunded(BillingId billingId, RefundReason refundReason) implements DomainEvent {
 
 }

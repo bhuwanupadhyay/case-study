@@ -6,32 +6,32 @@ import java.util.List;
 
 public abstract class AggregateRoot<ID extends ValueObject> extends Entity<ID> {
 
-  private final transient List<DomainEvent> domainEvents = new ArrayList<>();
+	private final transient List<DomainEvent> domainEvents = new ArrayList<>();
 
-  public AggregateRoot(ID id) {
-    super(id);
-  }
+	public AggregateRoot(ID id) {
+		super(id);
+	}
 
-  /**
-   * Register domain event
-   *
-   * @param event domain event
-   */
-  protected void registerEvent(DomainEvent event) {
-    this.domainEvents.add(event);
-  }
+	/**
+	 * Register domain event
+	 * @param event domain event
+	 */
+	protected void registerEvent(DomainEvent event) {
+		this.domainEvents.add(event);
+	}
 
-  /**
-   * Clear registered domain events.
-   */
-  public void clearDomainEvents() {
-    this.domainEvents.clear();
-  }
+	/**
+	 * Clear registered domain events.
+	 */
+	public void clearDomainEvents() {
+		this.domainEvents.clear();
+	}
 
-  /**
-   * @return list of domain events
-   */
-  public List<DomainEvent> getDomainEvents() {
-    return Collections.unmodifiableList(domainEvents);
-  }
+	/**
+	 * @return list of domain events
+	 */
+	public List<DomainEvent> getDomainEvents() {
+		return Collections.unmodifiableList(domainEvents);
+	}
+
 }

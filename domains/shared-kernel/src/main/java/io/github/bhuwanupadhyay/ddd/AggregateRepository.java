@@ -4,26 +4,26 @@ import java.util.Optional;
 
 public abstract class AggregateRepository<T extends AggregateRoot<ID>, ID extends ValueObject> {
 
-  private final DomainEventPublisher publisher;
+	private final DomainEventPublisher publisher;
 
-  protected AggregateRepository(DomainEventPublisher publisher) {
-    this.publisher = publisher;
-  }
+	protected AggregateRepository(DomainEventPublisher publisher) {
+		this.publisher = publisher;
+	}
 
-  public abstract Optional<T> findOne(ID id);
+	public abstract Optional<T> findOne(ID id);
 
-  public T find(ID id) {
-    return this.findOne(id)
-        .orElseThrow(() -> new DomainEntityNotFound(this.getClass().getName(), id));
-  }
+	public T find(ID id) {
+		return this.findOne(id).orElseThrow(() -> new DomainEntityNotFound(this.getClass().getName(), id));
+	}
 
-  public void save(T entity) {
-    this.persist(entity);
-    entity.getDomainEvents().forEach(publisher::publish);
-    entity.clearDomainEvents();
-  }
+	public void save(T entity) {
+		this.persist(entity);
+		entity.getDomainEvents().forEach(publisher::publish);
+		entity.clearDomainEvents();
+	}
 
-  protected abstract void persist(T entity);
+	protected abstract void persist(T entity);
 
-  public abstract ID nextId();
+	public abstract ID nextId();
+
 }

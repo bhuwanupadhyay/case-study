@@ -7,25 +7,28 @@ import org.springframework.messaging.SubscribableChannel;
 
 public interface EventSource {
 
-  String ORDER_PLACED = "orderPlaced";
-  String ORDER_MODIFIED = "orderModified";
-  String ORDER_CANCELLED = "orderCancelled";
+	String ORDER_PLACED = "orderPlaced";
 
-  @Input(ORDER_PLACED)
-  SubscribableChannel orderPlaced();
+	String ORDER_MODIFIED = "orderModified";
 
-  @Input(ORDER_MODIFIED)
-  SubscribableChannel orderModified();
+	String ORDER_CANCELLED = "orderCancelled";
 
-  @Input(ORDER_CANCELLED)
-  SubscribableChannel orderCancelled();
+	@Input(ORDER_PLACED)
+	SubscribableChannel orderPlaced();
 
-  @Output("orderBilled")
-  MessageChannel orderBilled();
+	@Input(ORDER_MODIFIED)
+	SubscribableChannel orderModified();
 
-  @Output("modificationBilled")
-  MessageChannel modificationBilled();
+	@Input(ORDER_CANCELLED)
+	SubscribableChannel orderCancelled();
 
-  @Output("orderRefunded")
-  MessageChannel orderRefunded();
+	@Output("orderBilled")
+	MessageChannel orderBilled();
+
+	@Output("modificationBilled")
+	MessageChannel modificationBilled();
+
+	@Output("orderRefunded")
+	MessageChannel orderRefunded();
+
 }

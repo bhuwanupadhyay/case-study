@@ -6,7 +6,9 @@ import io.github.bhuwanupadhyay.ddd.AggregateRepository;
 import io.github.bhuwanupadhyay.ddd.DomainEventPublisher;
 
 public abstract class Notifications extends AggregateRepository<Notification, NotificationId> {
-  protected Notifications(DomainEventPublisher publisher) {
-    super(publisher);
-  }
+
+	protected Notifications(DomainEventPublisher publisher) {
+		super(publisher);
+	}
+
 }

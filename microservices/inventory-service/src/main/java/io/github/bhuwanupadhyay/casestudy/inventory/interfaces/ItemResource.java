@@ -1,48 +1,49 @@
 package io.github.bhuwanupadhyay.casestudy.inventory.interfaces;
 
 import io.github.bhuwanupadhyay.casestudy.inventory.infrastructure.repositories.mybatis.dto.ItemDto;
+
 import java.math.BigDecimal;
 
 public class ItemResource {
 
-  private String itemName;
-  private String itemDescription;
-  private BigDecimal price;
-  private Integer quantity;
+	private String itemName;
 
-  public ItemResource() {
-  }
+	private String itemDescription;
 
-  public ItemResource(ItemDto itemDto) {
-    this.itemName = itemDto.getItemName();
-    this.itemDescription = itemDto.getItemDescription();
-    this.price = itemDto.getPrice();
-    this.quantity = itemDto.getQuantity();
-  }
+	private BigDecimal price;
 
-  public String getItemDescription() {
-    return itemDescription;
-  }
+	private Integer quantity;
 
-  public String getItemName() {
-    return itemName;
-  }
+	public ItemResource() {
+	}
 
-  public Integer getQuantity() {
-    return quantity;
-  }
+	public ItemResource(ItemDto itemDto) {
+		this.itemName = itemDto.getItemName();
+		this.itemDescription = itemDto.getItemDescription();
+		this.price = itemDto.getPrice();
+		this.quantity = itemDto.getQuantity();
+	}
 
-  public BigDecimal getPrice() {
-    return price;
-  }
+	public String getItemDescription() {
+		return itemDescription;
+	}
 
-  @Override
-  public String toString() {
-    return "ItemResource{" +
-        "itemName='" + itemName + '\'' +
-        ", itemDescription='" + itemDescription + '\'' +
-        ", price=" + price +
-        ", quantity=" + quantity +
-        '}';
-  }
+	public String getItemName() {
+		return itemName;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public BigDecimal getPrice() {
+		return price;
+	}
+
+	@Override
+	public String toString() {
+		return "ItemResource{" + "itemName='" + itemName + '\'' + ", itemDescription='" + itemDescription + '\''
+				+ ", price=" + price + ", quantity=" + quantity + '}';
+	}
+
 }

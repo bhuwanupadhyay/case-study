@@ -1,43 +1,43 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
-    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
-  <changeSet author="service" id="v1-1">
-    <createTable tableName="sale_orders">
-      <column autoIncrement="true" name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sale_orders"/>
-      </column>
-      <column name="order_id" type="VARCHAR(36)">
-        <constraints nullable="false" unique="true"/>
-      </column>
-      <column name="customer_id" type="VARCHAR(36)"/>
-      <column name="status" type="VARCHAR(100)"/>
-      <column name="cancellation_reason" type="VARCHAR(255)"/>
-      <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
-    </createTable>
-  </changeSet>
-  <changeSet author="service" id="v1-2">
-    <createTable tableName="sale_order_lines">
-      <column autoIncrement="true" name="id" type="BIGINT">
-        <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sale_order_lines"/>
-      </column>
-      <column name="order_id" type="VARCHAR(36)"/>
-      <column name="item_id" type="VARCHAR(36)"/>
-      <column name="quantity" type="INT"/>
-    </createTable>
-  </changeSet>
-  <changeSet author="service" id="v1-3">
-    <addForeignKeyConstraint
-        baseColumnNames="order_id"
-        baseTableName="sale_order_lines"
-        constraintName="fk_sale_orders"
-        deferrable="false"
-        initiallyDeferred="false"
-        onDelete="NO ACTION"
-        onUpdate="NO ACTION"
-        referencedColumnNames="order_id"
-        referencedTableName="sale_orders"
-        validate="true"/>
-  </changeSet>
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+    <changeSet author="service" id="v1-1">
+        <createTable tableName="sale_orders">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sale_orders"/>
+            </column>
+            <column name="order_id" type="VARCHAR(36)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="customer_id" type="VARCHAR(36)"/>
+            <column name="status" type="VARCHAR(100)"/>
+            <column name="cancellation_reason" type="VARCHAR(255)"/>
+            <column name="created_at" type="TIMESTAMP WITHOUT TIME ZONE"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="service" id="v1-2">
+        <createTable tableName="sale_order_lines">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_sale_order_lines"/>
+            </column>
+            <column name="order_id" type="VARCHAR(36)"/>
+            <column name="item_id" type="VARCHAR(36)"/>
+            <column name="quantity" type="INT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="service" id="v1-3">
+        <addForeignKeyConstraint
+                baseColumnNames="order_id"
+                baseTableName="sale_order_lines"
+                constraintName="fk_sale_orders"
+                deferrable="false"
+                initiallyDeferred="false"
+                onDelete="NO ACTION"
+                onUpdate="NO ACTION"
+                referencedColumnNames="order_id"
+                referencedTableName="sale_orders"
+                validate="true"/>
+    </changeSet>
 </databaseChangeLog>

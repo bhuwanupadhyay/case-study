@@ -8,15 +8,17 @@ import io.github.bhuwanupadhyay.core.CommandService;
 
 public class ModifyOrderCommandService implements CommandService<ModifyOrderCommand> {
 
-  private final Orders orders;
+	private final Orders orders;
 
-  public ModifyOrderCommandService(Orders orders) {
-    this.orders = orders;
-  }
+	public ModifyOrderCommandService(Orders orders) {
+		this.orders = orders;
+	}
 
-  @Override public void execute(ModifyOrderCommand command) {
-    Order order = orders.find(new OrderId(command.orderId()));
-    order.on(command);
-    orders.save(order);
-  }
+	@Override
+	public void execute(ModifyOrderCommand command) {
+		Order order = orders.find(new OrderId(command.orderId()));
+		order.on(command);
+		orders.save(order);
+	}
+
 }

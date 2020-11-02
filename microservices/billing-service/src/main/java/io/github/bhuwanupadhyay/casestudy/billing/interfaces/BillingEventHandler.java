@@ -10,32 +10,35 @@ import org.springframework.stereotype.Service;
 @Service
 public class BillingEventHandler implements EventHandler {
 
-  private final ChargeOrderCommandService chargeOrderCommandService;
-  private final ModifyChargeCommandService modifyChargeCommandService;
-  private final RefundOrderCommandService refundOrderCommandService;
-  private final static Logger LOG = LoggerFactory.getLogger(BillingEventHandler.class);
+	private final static Logger LOG = LoggerFactory.getLogger(BillingEventHandler.class);
+	private final ChargeOrderCommandService chargeOrderCommandService;
+	private final ModifyChargeCommandService modifyChargeCommandService;
+	private final RefundOrderCommandService refundOrderCommandService;
 
-  public BillingEventHandler(
-      ChargeOrderCommandService chargeOrderCommandService,
-      ModifyChargeCommandService modifyChargeCommandService,
-      RefundOrderCommandService refundOrderCommandService) {
-    this.chargeOrderCommandService = chargeOrderCommandService;
-    this.modifyChargeCommandService = modifyChargeCommandService;
-    this.refundOrderCommandService = refundOrderCommandService;
-  }
+	public BillingEventHandler(ChargeOrderCommandService chargeOrderCommandService,
+			ModifyChargeCommandService modifyChargeCommandService,
+			RefundOrderCommandService refundOrderCommandService) {
+		this.chargeOrderCommandService = chargeOrderCommandService;
+		this.modifyChargeCommandService = modifyChargeCommandService;
+		this.refundOrderCommandService = refundOrderCommandService;
+	}
 
-  @Override public void on(OrderPlacedPayload payload) {
-    LOG.info("Received: {}", payload);
-    chargeOrderCommandService.execute(payload.toCommand());
-  }
+	@Override
+	public void on(OrderPlacedPayload payload) {
+		LOG.info("Received: {}", payload);
+		chargeOrderCommandService.execute(payload.toCommand());
+	}
 
-  @Override public void on(OrderModifiedPayload payload) {
-    LOG.info("Received: {}", payload);
-    modifyChargeCommandService.execute(payload.toCommand());
-  }
+	@Override
+	public void on(OrderModifiedPayload payload) {
+		LOG.info("Received: {}", payload);
+		modifyChargeCommandService.execute(payload.toCommand());
+	}
 
-  @Override public void on(OrderCancelledPayload payload) {
-    LOG.info("Received: {}", payload);
-    refundOrderCommandService.execute(payload.toCommand());
-  }
+	@Override
+	public void on(OrderCancelledPayload payload) {
+		LOG.info("Received: {}", payload);
+		refundOrderCommandService.execute(payload.toCommand());
+	}
+
 }

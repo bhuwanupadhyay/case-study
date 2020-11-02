@@ -4,7 +4,6 @@ import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.Cancel
 import io.github.bhuwanupadhyay.casestudy.sales.domain.model.valueobjects.OrderId;
 import io.github.bhuwanupadhyay.ddd.DomainEvent;
 
-public record OrderCancelled(OrderId orderId,
-                             CancellationReason cancellationReason) implements DomainEvent {
+public record OrderCancelled(OrderId orderId, CancellationReason cancellationReason) implements DomainEvent {
 
 }

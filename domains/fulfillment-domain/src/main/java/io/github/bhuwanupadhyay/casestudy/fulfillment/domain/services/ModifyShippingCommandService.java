@@ -6,29 +6,33 @@ import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.aggregates.Sh
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.repositories.Shippings;
 import io.github.bhuwanupadhyay.casestudy.fulfillment.domain.model.valueobjects.OrderId;
 import io.github.bhuwanupadhyay.core.CommandService;
+
 import java.util.Optional;
 
 public class ModifyShippingCommandService implements CommandService<ModifyOrderCommand> {
 
-  private final Shippings shippings;
-  private final PrepareShippingCommandService prepareShippingCommandService;
+	private final Shippings shippings;
 
-  public ModifyShippingCommandService(Shippings shippings,
-      PrepareShippingCommandService prepareShippingCommandService) {
-    this.shippings = shippings;
-    this.prepareShippingCommandService = prepareShippingCommandService;
-  }
+	private final PrepareShippingCommandService prepareShippingCommandService;
 
-  @Override public void execute(ModifyOrderCommand command) {
-    Optional<Shipping> byOrderId =
-        shippings.findByOrderIdAndStatusNotShipped(new OrderId(command.orderId()));
-    if (byOrderId.isPresent()) {
-      Shipping shipping = byOrderId.get();
-      shipping.on(command);
-      shippings.save(shipping);
-    } else {
-      this.prepareShippingCommandService.execute(
-          new PrepareShippingCommand(command.orderId(), command.orderItems()));
-    }
-  }
+	public ModifyShippingCommandService(Shippings shippings,
+			PrepareShippingCommandService prepareShippingCommandService) {
+		this.shippings = shippings;
+		this.prepareShippingCommandService = prepareShippingCommandService;
+	}
+
+	@Override
+	public void execute(ModifyOrderCommand command) {
+		Optional<Shipping> byOrderId = shippings.findByOrderIdAndStatusNotShipped(new OrderId(command.orderId()));
+		if (byOrderId.isPresent()) {
+			Shipping shipping = byOrderId.get();
+			shipping.on(command);
+			shippings.save(shipping);
+		}
+		else {
+			this.prepareShippingCommandService
+					.execute(new PrepareShippingCommand(command.orderId(), command.orderItems()));
+		}
+	}
+
 }

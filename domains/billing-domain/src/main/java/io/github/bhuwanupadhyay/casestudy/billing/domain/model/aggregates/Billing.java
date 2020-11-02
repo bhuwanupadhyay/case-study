@@ -7,98 +7,94 @@ import io.github.bhuwanupadhyay.casestudy.billing.domain.commands.RefundOrderCom
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.events.ModificationBilled;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.events.OrderBilled;
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.events.OrderRefunded;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.BillAmount;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.BillingId;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.BillingStatus;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.ItemId;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.OrderId;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Price;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Quantity;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Rates;
-import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.RefundReason;
+import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.*;
 import io.github.bhuwanupadhyay.core.BadRequestException;
 import io.github.bhuwanupadhyay.core.Problem;
 import io.github.bhuwanupadhyay.core.SimpleProblem;
 import io.github.bhuwanupadhyay.ddd.AggregateRoot;
+
 import java.math.BigDecimal;
 import java.util.List;
 
 public class Billing extends AggregateRoot<BillingId> {
 
-  private final OrderId orderId;
-  private BillAmount billAmount;
-  private BillingStatus status;
-  private RefundReason refundReason;
+	private final OrderId orderId;
 
-  public Billing(BillingId billingId, OrderId orderId) {
-    super(billingId);
-    this.orderId = orderId;
-  }
+	private BillAmount billAmount;
 
-  public Billing(BillingId billingId, ChargeOrderCommand command, Rates rates) {
-    super(billingId);
-    this.billAmount = getTotalPrice(rates, command.orderItems());
-    this.orderId = new OrderId(command.orderId());
-    this.status = BillingStatus.CHARGED;
-    this.registerEvent(new OrderBilled(this.getId(), this.orderId, this.billAmount));
-  }
+	private BillingStatus status;
 
-  private static BillAmount getTotalPrice(Rates rates, List<OrderItem> orderItems) {
-    BigDecimal amount = BigDecimal.ZERO;
-    for (OrderItem e : orderItems) {
-      ItemId key = new ItemId(e.itemId());
-      Price price = rates.getByItemId(key)
-          .orElseThrow(() -> new BadRequestException(
-              new SimpleProblem("orderItems." + key, "price.not.found")));
-      Quantity quantity = new Quantity(e.quantity());
-      BigDecimal totalQuantityAmount = price.value().multiply(new BigDecimal(quantity.value()));
-      amount = amount.add(totalQuantityAmount);
-    }
-    return new BillAmount(amount);
-  }
+	private RefundReason refundReason;
 
-  public void on(ModifyChargeCommand command, Rates rates) {
-    this.billAmount = getTotalPrice(rates, command.orderItems());
-    this.status = BillingStatus.CHARGED;
-    this.registerEvent(new ModificationBilled(this.getId(), this.orderId, this.billAmount));
-  }
+	public Billing(BillingId billingId, OrderId orderId) {
+		super(billingId);
+		this.orderId = orderId;
+	}
 
-  public void on(RefundOrderCommand command) {
-    this.refundReason = new RefundReason(command.reason());
-    this.status = BillingStatus.REFUNDED;
-    this.registerEvent(new OrderRefunded(this.getId(), this.refundReason));
-  }
+	public Billing(BillingId billingId, ChargeOrderCommand command, Rates rates) {
+		super(billingId);
+		this.billAmount = getTotalPrice(rates, command.orderItems());
+		this.orderId = new OrderId(command.orderId());
+		this.status = BillingStatus.CHARGED;
+		this.registerEvent(new OrderBilled(this.getId(), this.orderId, this.billAmount));
+	}
 
-  public RefundReason getRefundReason() {
-    return refundReason;
-  }
+	private static BillAmount getTotalPrice(Rates rates, List<OrderItem> orderItems) {
+		BigDecimal amount = BigDecimal.ZERO;
+		for (OrderItem e : orderItems) {
+			ItemId key = new ItemId(e.itemId());
+			Price price = rates.getByItemId(key).orElseThrow(
+					() -> new BadRequestException(new SimpleProblem("orderItems." + key, "price.not.found")));
+			Quantity quantity = new Quantity(e.quantity());
+			BigDecimal totalQuantityAmount = price.value().multiply(new BigDecimal(quantity.value()));
+			amount = amount.add(totalQuantityAmount);
+		}
+		return new BillAmount(amount);
+	}
 
-  public BillAmount getBillAmount() {
-    return billAmount;
-  }
+	public void on(ModifyChargeCommand command, Rates rates) {
+		this.billAmount = getTotalPrice(rates, command.orderItems());
+		this.status = BillingStatus.CHARGED;
+		this.registerEvent(new ModificationBilled(this.getId(), this.orderId, this.billAmount));
+	}
 
-  public OrderId getOrderId() {
-    return orderId;
-  }
+	public void on(RefundOrderCommand command) {
+		this.refundReason = new RefundReason(command.reason());
+		this.status = BillingStatus.REFUNDED;
+		this.registerEvent(new OrderRefunded(this.getId(), this.refundReason));
+	}
 
-  public BillingStatus getStatus() {
-    return status;
-  }
+	public RefundReason getRefundReason() {
+		return refundReason;
+	}
 
-  public Billing withAmount(BillAmount billAmount) {
-    Problem.notNull(billAmount);
-    this.billAmount = billAmount;
-    return this;
-  }
+	public BillAmount getBillAmount() {
+		return billAmount;
+	}
 
-  public Billing withRefundReason(RefundReason refundReason) {
-    this.refundReason = refundReason;
-    return this;
-  }
+	public OrderId getOrderId() {
+		return orderId;
+	}
 
-  public Billing withStatus(BillingStatus status) {
-    Problem.notNull(status);
-    this.status = status;
-    return this;
-  }
+	public BillingStatus getStatus() {
+		return status;
+	}
+
+	public Billing withAmount(BillAmount billAmount) {
+		Problem.notNull(billAmount);
+		this.billAmount = billAmount;
+		return this;
+	}
+
+	public Billing withRefundReason(RefundReason refundReason) {
+		this.refundReason = refundReason;
+		return this;
+	}
+
+	public Billing withStatus(BillingStatus status) {
+		Problem.notNull(status);
+		this.status = status;
+		return this;
+	}
+
 }

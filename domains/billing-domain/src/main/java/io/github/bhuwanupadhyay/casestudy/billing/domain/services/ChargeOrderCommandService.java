@@ -8,18 +8,20 @@ import io.github.bhuwanupadhyay.core.CommandService;
 
 public class ChargeOrderCommandService implements CommandService<ChargeOrderCommand> {
 
-  private final Billings billings;
-  private final InventoryService inventoryService;
+	private final Billings billings;
 
-  public ChargeOrderCommandService(Billings billings, InventoryService inventoryService) {
-    this.billings = billings;
-    this.inventoryService = inventoryService;
-  }
+	private final InventoryService inventoryService;
 
-  @Override
-  public void execute(ChargeOrderCommand command) {
-    Rates rates = ServiceUtils.getRates(inventoryService, command.orderItems());
-    Billing billing = new Billing(billings.nextId(), command, rates);
-    billings.save(billing);
-  }
+	public ChargeOrderCommandService(Billings billings, InventoryService inventoryService) {
+		this.billings = billings;
+		this.inventoryService = inventoryService;
+	}
+
+	@Override
+	public void execute(ChargeOrderCommand command) {
+		Rates rates = ServiceUtils.getRates(inventoryService, command.orderItems());
+		Billing billing = new Billing(billings.nextId(), command, rates);
+		billings.save(billing);
+	}
+
 }
