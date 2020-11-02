@@ -36,3 +36,6 @@ The series also cover how to deploy microservices in both the cloud and on premi
 ### Part 6: Logging and Monitoring
 - [Monitoring applications with Prometheus and Grafana]()
 - [ELK Log aggregation]()
+
+### Part 7: Docker and Kubernetes
+- 
