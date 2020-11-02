@@ -5,16 +5,19 @@ import org.springframework.messaging.SubscribableChannel;
 
 public interface EventSource {
 
-  String ORDER_PLACED = "orderPlaced";
-  String ORDER_SHIPPED = "orderShipped";
-  String ORDER_REFUNDED = "orderRefunded";
+	String ORDER_PLACED = "orderPlaced";
 
-  @Input(ORDER_PLACED)
-  SubscribableChannel orderPlaced();
+	String ORDER_SHIPPED = "orderShipped";
 
-  @Input(ORDER_SHIPPED)
-  SubscribableChannel orderShipped();
+	String ORDER_REFUNDED = "orderRefunded";
 
-  @Input(ORDER_REFUNDED)
-  SubscribableChannel orderRefunded();
+	@Input(ORDER_PLACED)
+	SubscribableChannel orderPlaced();
+
+	@Input(ORDER_SHIPPED)
+	SubscribableChannel orderShipped();
+
+	@Input(ORDER_REFUNDED)
+	SubscribableChannel orderRefunded();
+
 }

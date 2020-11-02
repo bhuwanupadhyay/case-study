@@ -8,15 +8,17 @@ import io.github.bhuwanupadhyay.core.CommandService;
 
 public class RefundOrderCommandService implements CommandService<RefundOrderCommand> {
 
-  private final Billings billings;
+	private final Billings billings;
 
-  public RefundOrderCommandService(Billings billings) {
-    this.billings = billings;
-  }
+	public RefundOrderCommandService(Billings billings) {
+		this.billings = billings;
+	}
 
-  @Override public void execute(RefundOrderCommand command) {
-    Billing billing = billings.findByOrderId(new OrderId(command.orderId()));
-    billing.on(command);
-    billings.save(billing);
-  }
+	@Override
+	public void execute(RefundOrderCommand command) {
+		Billing billing = billings.findByOrderId(new OrderId(command.orderId()));
+		billing.on(command);
+		billings.save(billing);
+	}
+
 }

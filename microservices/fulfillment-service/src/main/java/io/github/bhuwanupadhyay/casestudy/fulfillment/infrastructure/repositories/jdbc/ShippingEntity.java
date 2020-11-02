@@ -1,85 +1,96 @@
 package io.github.bhuwanupadhyay.casestudy.fulfillment.infrastructure.repositories.jdbc;
 
-import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Objects;
+
 @Table("shippings")
 public class ShippingEntity implements Serializable {
 
-  @Id
-  @Column("id")
-  private Long id;
-  @Column("shipping_id")
-  private String shippingId;
-  @Column("order_id")
-  private String orderId;
-  @Column("shipping_address")
-  private String shippingAddress;
-  @Column("created_at")
-  private LocalDateTime createdAt;
-  @Column("status")
-  private String status;
+	@Id
+	@Column("id")
+	private Long id;
 
-  public Long getId() {
-    return id;
-  }
+	@Column("shipping_id")
+	private String shippingId;
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+	@Column("order_id")
+	private String orderId;
 
-  public String getShippingId() {
-    return shippingId;
-  }
+	@Column("shipping_address")
+	private String shippingAddress;
 
-  public void setShippingId(String shippingId) {
-    this.shippingId = shippingId;
-  }
+	@Column("created_at")
+	private LocalDateTime createdAt;
 
-  public String getOrderId() {
-    return orderId;
-  }
+	@Column("status")
+	private String status;
 
-  public void setOrderId(String orderId) {
-    this.orderId = orderId;
-  }
+	public Long getId() {
+		return id;
+	}
 
-  public String getShippingAddress() {
-    return shippingAddress;
-  }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-  public void setShippingAddress(String shippingAddress) {
-    this.shippingAddress = shippingAddress;
-  }
+	public String getShippingId() {
+		return shippingId;
+	}
 
-  public LocalDateTime getCreatedAt() {
-    return createdAt;
-  }
+	public void setShippingId(String shippingId) {
+		this.shippingId = shippingId;
+	}
 
-  public void setCreatedAt(LocalDateTime createdAt) {
-    this.createdAt = createdAt;
-  }
+	public String getOrderId() {
+		return orderId;
+	}
 
-  public void setStatus(String status) {
-    this.status = status;
-  }
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
 
-  public String getStatus() {
-    return status;
-  }
+	public String getShippingAddress() {
+		return shippingAddress;
+	}
 
-  @Override public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    ShippingEntity that = (ShippingEntity) o;
-    return Objects.equals(id, that.id);
-  }
+	public void setShippingAddress(String shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
 
-  @Override public int hashCode() {
-    return Objects.hash(id);
-  }
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		ShippingEntity that = (ShippingEntity) o;
+		return Objects.equals(id, that.id);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
 }

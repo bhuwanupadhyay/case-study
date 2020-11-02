@@ -9,16 +9,17 @@ import io.github.bhuwanupadhyay.casestudy.sales.jooq.tables.SaleOrders;
 /**
  * Convenience access to all tables in public
  */
-@SuppressWarnings({"all", "unchecked", "rawtypes"})
+@SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
 
-  /**
-   * The table <code>public.sale_order_lines</code>.
-   */
-  public static final SaleOrderLines SALE_ORDER_LINES = SaleOrderLines.SALE_ORDER_LINES;
+	/**
+	 * The table <code>public.sale_order_lines</code>.
+	 */
+	public static final SaleOrderLines SALE_ORDER_LINES = SaleOrderLines.SALE_ORDER_LINES;
 
-  /**
-   * The table <code>public.sale_orders</code>.
-   */
-  public static final SaleOrders SALE_ORDERS = SaleOrders.SALE_ORDERS;
+	/**
+	 * The table <code>public.sale_orders</code>.
+	 */
+	public static final SaleOrders SALE_ORDERS = SaleOrders.SALE_ORDERS;
+
 }

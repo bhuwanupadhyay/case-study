@@ -11,20 +11,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CommandServiceConfiguration {
 
-  @Bean
-  public ChargeOrderCommandService chargeOrderCommandService(Billings billings,
-      InventoryService inventoryService) {
-    return new ChargeOrderCommandService(billings, inventoryService);
-  }
+	@Bean
+	public ChargeOrderCommandService chargeOrderCommandService(Billings billings, InventoryService inventoryService) {
+		return new ChargeOrderCommandService(billings, inventoryService);
+	}
 
-  @Bean
-  public ModifyChargeCommandService modifyChargeCommandService(Billings billings,
-      InventoryService inventoryService) {
-    return new ModifyChargeCommandService(billings, inventoryService);
-  }
+	@Bean
+	public ModifyChargeCommandService modifyChargeCommandService(Billings billings, InventoryService inventoryService) {
+		return new ModifyChargeCommandService(billings, inventoryService);
+	}
 
-  @Bean
-  public RefundOrderCommandService refundOrderCommandService(Billings billings) {
-    return new RefundOrderCommandService(billings);
-  }
+	@Bean
+	public RefundOrderCommandService refundOrderCommandService(Billings billings) {
+		return new RefundOrderCommandService(billings);
+	}
+
 }

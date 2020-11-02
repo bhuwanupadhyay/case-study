@@ -5,12 +5,13 @@ import org.springframework.messaging.MessageChannel;
 
 public interface EventSource {
 
-  @Output("orderPlaced")
-  MessageChannel orderPlaced();
+	@Output("orderPlaced")
+	MessageChannel orderPlaced();
 
-  @Output("orderModified")
-  MessageChannel orderModified();
+	@Output("orderModified")
+	MessageChannel orderModified();
 
-  @Output("orderCancelled")
-  MessageChannel orderCancelled();
+	@Output("orderCancelled")
+	MessageChannel orderCancelled();
+
 }

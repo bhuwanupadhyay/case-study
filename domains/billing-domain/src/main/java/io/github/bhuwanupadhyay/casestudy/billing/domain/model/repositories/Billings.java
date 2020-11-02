@@ -7,9 +7,11 @@ import io.github.bhuwanupadhyay.ddd.AggregateRepository;
 import io.github.bhuwanupadhyay.ddd.DomainEventPublisher;
 
 public abstract class Billings extends AggregateRepository<Billing, BillingId> {
-  protected Billings(DomainEventPublisher publisher) {
-    super(publisher);
-  }
 
-  public abstract Billing findByOrderId(OrderId orderId);
+	protected Billings(DomainEventPublisher publisher) {
+		super(publisher);
+	}
+
+	public abstract Billing findByOrderId(OrderId orderId);
+
 }

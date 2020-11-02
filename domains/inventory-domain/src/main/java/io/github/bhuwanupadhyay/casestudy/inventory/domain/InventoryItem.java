@@ -4,40 +4,49 @@ import java.util.Objects;
 
 public class InventoryItem {
 
-  private ItemId itemId;
-  private String itemName;
-  private String itemDescription;
-  private Price price;
-  private StockQuantity stockQuantity;
+	private ItemId itemId;
 
-  @Override public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    InventoryItem that = (InventoryItem) o;
-    return Objects.equals(itemId, that.itemId);
-  }
+	private String itemName;
 
-  @Override public int hashCode() {
-    return Objects.hash(itemId);
-  }
+	private String itemDescription;
 
-  public ItemId getItemId() {
-    return itemId;
-  }
+	private Price price;
 
-  public String getItemName() {
-    return itemName;
-  }
+	private StockQuantity stockQuantity;
 
-  public String getItemDescription() {
-    return itemDescription;
-  }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		InventoryItem that = (InventoryItem) o;
+		return Objects.equals(itemId, that.itemId);
+	}
 
-  public Price getPrice() {
-    return price;
-  }
+	@Override
+	public int hashCode() {
+		return Objects.hash(itemId);
+	}
 
-  public StockQuantity getStockQuantity() {
-    return stockQuantity;
-  }
+	public ItemId getItemId() {
+		return itemId;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public String getItemDescription() {
+		return itemDescription;
+	}
+
+	public Price getPrice() {
+		return price;
+	}
+
+	public StockQuantity getStockQuantity() {
+		return stockQuantity;
+	}
+
 }

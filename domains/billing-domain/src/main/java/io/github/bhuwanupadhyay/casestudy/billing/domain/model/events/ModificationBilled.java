@@ -5,8 +5,6 @@ import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.Bill
 import io.github.bhuwanupadhyay.casestudy.billing.domain.model.valueobjects.OrderId;
 import io.github.bhuwanupadhyay.ddd.DomainEvent;
 
-public record ModificationBilled(BillingId billingId,
-                                 OrderId orderId,
-                                 BillAmount billAmount) implements DomainEvent {
+public record ModificationBilled(BillingId billingId, OrderId orderId, BillAmount billAmount) implements DomainEvent {
 
 }

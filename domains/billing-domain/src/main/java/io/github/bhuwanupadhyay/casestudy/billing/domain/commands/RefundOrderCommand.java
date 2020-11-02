@@ -1,5 +1,4 @@
 package io.github.bhuwanupadhyay.casestudy.billing.domain.commands;
 
-public record RefundOrderCommand(String orderId,
-                                 String reason) {
+public record RefundOrderCommand(String orderId, String reason) {
 }

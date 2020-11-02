@@ -5,49 +5,50 @@ import java.math.BigDecimal;
 
 public class ItemDto implements Serializable {
 
-  private String itemName;
-  private String itemDescription;
-  private BigDecimal price;
-  private Integer quantity;
+	private String itemName;
 
-  public String getItemName() {
-    return itemName;
-  }
+	private String itemDescription;
 
-  public void setItemName(String itemName) {
-    this.itemName = itemName;
-  }
+	private BigDecimal price;
 
-  public String getItemDescription() {
-    return itemDescription;
-  }
+	private Integer quantity;
 
-  public void setItemDescription(String itemDescription) {
-    this.itemDescription = itemDescription;
-  }
+	public String getItemName() {
+		return itemName;
+	}
 
-  public BigDecimal getPrice() {
-    return price;
-  }
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
 
-  public void setPrice(BigDecimal price) {
-    this.price = price;
-  }
+	public String getItemDescription() {
+		return itemDescription;
+	}
 
-  public Integer getQuantity() {
-    return quantity;
-  }
+	public void setItemDescription(String itemDescription) {
+		this.itemDescription = itemDescription;
+	}
 
-  public void setQuantity(Integer quantity) {
-    this.quantity = quantity;
-  }
+	public BigDecimal getPrice() {
+		return price;
+	}
 
-  @Override public String toString() {
-    return "ItemDto{" +
-        "itemName='" + itemName + '\'' +
-        ", itemDescription='" + itemDescription + '\'' +
-        ", price=" + price +
-        ", quantity=" + quantity +
-        '}';
-  }
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	@Override
+	public String toString() {
+		return "ItemDto{" + "itemName='" + itemName + '\'' + ", itemDescription='" + itemDescription + '\'' + ", price="
+				+ price + ", quantity=" + quantity + '}';
+	}
+
 }

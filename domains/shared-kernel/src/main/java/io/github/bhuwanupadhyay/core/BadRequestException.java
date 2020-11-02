@@ -6,21 +6,22 @@ import java.util.List;
 
 public class BadRequestException extends RuntimeException {
 
-  private final List<Problem> problems = new ArrayList<>();
+	private final List<Problem> problems = new ArrayList<>();
 
-  public BadRequestException(Problem problem) {
-    if (problem != null) {
-      problems.add(problem);
-    }
-  }
+	public BadRequestException(Problem problem) {
+		if (problem != null) {
+			problems.add(problem);
+		}
+	}
 
-  public BadRequestException(List<Problem> problems) {
-    if (problems != null) {
-      this.problems.addAll(problems);
-    }
-  }
+	public BadRequestException(List<Problem> problems) {
+		if (problems != null) {
+			this.problems.addAll(problems);
+		}
+	}
 
-  public List<Problem> getProblems() {
-    return Collections.unmodifiableList(problems);
-  }
+	public List<Problem> getProblems() {
+		return Collections.unmodifiableList(problems);
+	}
+
 }

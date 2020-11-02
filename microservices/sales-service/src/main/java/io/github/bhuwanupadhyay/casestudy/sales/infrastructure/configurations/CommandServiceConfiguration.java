@@ -10,18 +10,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CommandServiceConfiguration {
 
-  @Bean
-  public PlaceOrderCommandService placeOrderCommandService(Orders orders) {
-    return new PlaceOrderCommandService(orders);
-  }
+	@Bean
+	public PlaceOrderCommandService placeOrderCommandService(Orders orders) {
+		return new PlaceOrderCommandService(orders);
+	}
 
-  @Bean
-  public ModifyOrderCommandService modifyOrderCommandService(Orders orders) {
-    return new ModifyOrderCommandService(orders);
-  }
+	@Bean
+	public ModifyOrderCommandService modifyOrderCommandService(Orders orders) {
+		return new ModifyOrderCommandService(orders);
+	}
 
-  @Bean
-  public CancelOrderCommandService cancelOrderCommandService(Orders orders) {
-    return new CancelOrderCommandService(orders);
-  }
+	@Bean
+	public CancelOrderCommandService cancelOrderCommandService(Orders orders) {
+		return new CancelOrderCommandService(orders);
+	}
+
 }

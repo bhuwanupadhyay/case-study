@@ -4,9 +4,9 @@ import io.github.bhuwanupadhyay.ddd.ValueObject;
 
 public record OrderId(String value) implements ValueObject {
 
-  public static final String ORDER_ID_INVALID = "orderId.invalid";
+	public static final String ORDER_ID_INVALID = "orderId.invalid";
 
-  //public OrderId {
-  //  Problem.raiseIfEmpty(this.value(), () -> ORDER_ID_INVALID);
-  //}
+	// public OrderId {
+	// Problem.raiseIfEmpty(this.value(), () -> ORDER_ID_INVALID);
+	// }
 }

@@ -8,15 +8,17 @@ import io.github.bhuwanupadhyay.core.CommandService;
 
 public class CancelOrderCommandService implements CommandService<CancelOrderCommand> {
 
-  private final Orders orders;
+	private final Orders orders;
 
-  public CancelOrderCommandService(Orders orders) {
-    this.orders = orders;
-  }
+	public CancelOrderCommandService(Orders orders) {
+		this.orders = orders;
+	}
 
-  @Override public void execute(CancelOrderCommand command) {
-    Order order = orders.find(new OrderId(command.orderId()));
-    order.on(command);
-    orders.save(order);
-  }
+	@Override
+	public void execute(CancelOrderCommand command) {
+		Order order = orders.find(new OrderId(command.orderId()));
+		order.on(command);
+		orders.save(order);
+	}
+
 }

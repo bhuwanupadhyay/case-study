@@ -11,24 +11,25 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CommandServiceConfiguration {
 
-  @Bean
-  public PrepareShippingCommandService prepareShippingCommandService(Shippings shippings) {
-    return new PrepareShippingCommandService(shippings);
-  }
+	@Bean
+	public PrepareShippingCommandService prepareShippingCommandService(Shippings shippings) {
+		return new PrepareShippingCommandService(shippings);
+	}
 
-  @Bean
-  public ShipOrderCommandService shipOrderCommandService(Shippings billings) {
-    return new ShipOrderCommandService(billings);
-  }
+	@Bean
+	public ShipOrderCommandService shipOrderCommandService(Shippings billings) {
+		return new ShipOrderCommandService(billings);
+	}
 
-  @Bean
-  public CancelShippingCommandService cancelShippingCommandService(Shippings billings) {
-    return new CancelShippingCommandService(billings);
-  }
+	@Bean
+	public CancelShippingCommandService cancelShippingCommandService(Shippings billings) {
+		return new CancelShippingCommandService(billings);
+	}
 
-  @Bean
-  public ModifyShippingCommandService modifyShippingCommandService(Shippings billings,
-      PrepareShippingCommandService prepareShippingCommandService) {
-    return new ModifyShippingCommandService(billings, prepareShippingCommandService);
-  }
+	@Bean
+	public ModifyShippingCommandService modifyShippingCommandService(Shippings billings,
+			PrepareShippingCommandService prepareShippingCommandService) {
+		return new ModifyShippingCommandService(billings, prepareShippingCommandService);
+	}
+
 }
